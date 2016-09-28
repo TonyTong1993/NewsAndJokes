@@ -11,6 +11,8 @@
 @interface YHPhotoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property (nonatomic,strong) UICollectionView *collectionView;
 @property (nonatomic,strong) UIRefreshControl *refreshControl;
+@property (nonatomic,copy)   NSMutableArray   *dataSources;
+@property (nonatomic,assign) BOOL             isPullUp;
 @end
 #define CellID @"cell"
 @implementation YHPhotoViewController
@@ -50,19 +52,46 @@
     }
     return _refreshControl;
 }
+-(NSMutableArray *)dataSources{
+    if (!_dataSources) {
+        _dataSources = [[NSMutableArray alloc] init];
+        for (int i = 0; i < 6; i++) {
+            [_dataSources addObject:@(i)];
+        }
+    }
+    return _dataSources;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupView];
 }
 #pragma mark---获取数据
 -(void)loadData{
-    //模拟延迟加载数据
+    if (self.isPullUp) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            for (int i = 0; i < 10; i++) {
+                [self.dataSources addObject:@(i)];
+            }
+            NSLog(@"完成上拉刷新数据");
+            //关闭刷新控件
+            self.isPullUp = false;
+            //刷新数据
+            [_collectionView reloadData];
+        });
+    }else{
+           //模拟延迟加载数据
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        for (int i = 0; i < 10; i++) {
+            [self.dataSources insertObject:@(i) atIndex:0];
+        }
         //关闭刷新控件
         [_refreshControl endRefreshing];
         //刷新数据
         [_collectionView reloadData];
     });
+    }
+ 
 }
 #pragma mark---设置界面
 -(void)setupView{
@@ -71,7 +100,7 @@
 }
 #pragma mark---UICollectionViewDataSource
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 20;
+    return self.dataSources.count;
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellID forIndexPath:indexPath];
@@ -80,6 +109,16 @@
 }
 //添加上拉无缝数据加载
 -(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSInteger section = collectionView.numberOfSections;
+    NSInteger items = _dataSources.count-1;
+    NSInteger row = indexPath.item;
+    if (section == 0 || items == 0) {
+        return;
+    }
+    if (items == row) {
+        self.isPullUp = YES;
+       [self loadData];
+    }
     
 }
 @end
