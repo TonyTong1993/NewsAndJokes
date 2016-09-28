@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		84CAC2E11D9B50D2001BCD1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CAC2E01D9B50D2001BCD1F /* AppDelegate.swift */; };
 		84CAC2E31D9B50D2001BCD1F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CAC2E21D9B50D2001BCD1F /* ViewController.swift */; };
-		84CAC2E61D9B50D2001BCD1F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84CAC2E41D9B50D2001BCD1F /* Main.storyboard */; };
 		84CAC2E81D9B50D2001BCD1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84CAC2E71D9B50D2001BCD1F /* Assets.xcassets */; };
 		84CAC2EB1D9B50D2001BCD1F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84CAC2E91D9B50D2001BCD1F /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -18,7 +17,6 @@
 		84CAC2DD1D9B50D2001BCD1F /* DayDayNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayDayNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84CAC2E01D9B50D2001BCD1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84CAC2E21D9B50D2001BCD1F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		84CAC2E51D9B50D2001BCD1F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84CAC2E71D9B50D2001BCD1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84CAC2EA1D9B50D2001BCD1F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84CAC2EC1D9B50D2001BCD1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -54,14 +52,69 @@
 		84CAC2DF1D9B50D2001BCD1F /* DayDayNews */ = {
 			isa = PBXGroup;
 			children = (
+				84CAC2F61D9B56B7001BCD1F /* Main */,
+				84CAC2F21D9B562D001BCD1F /* Profile */,
 				84CAC2E01D9B50D2001BCD1F /* AppDelegate.swift */,
 				84CAC2E21D9B50D2001BCD1F /* ViewController.swift */,
-				84CAC2E41D9B50D2001BCD1F /* Main.storyboard */,
 				84CAC2E71D9B50D2001BCD1F /* Assets.xcassets */,
 				84CAC2E91D9B50D2001BCD1F /* LaunchScreen.storyboard */,
 				84CAC2EC1D9B50D2001BCD1F /* Info.plist */,
 			);
 			path = DayDayNews;
+			sourceTree = "<group>";
+		};
+		84CAC2F21D9B562D001BCD1F /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				84CAC2F31D9B562D001BCD1F /* Model */,
+				84CAC2F41D9B562D001BCD1F /* View */,
+				84CAC2F51D9B562D001BCD1F /* ViewModel */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		84CAC2F31D9B562D001BCD1F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		84CAC2F41D9B562D001BCD1F /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		84CAC2F51D9B562D001BCD1F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		84CAC2F61D9B56B7001BCD1F /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				84CAC2F71D9B56B7001BCD1F /* Base */,
+				84CAC2F81D9B56B7001BCD1F /* Root */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		84CAC2F71D9B56B7001BCD1F /* Base */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		84CAC2F81D9B56B7001BCD1F /* Root */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Root;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -90,6 +143,7 @@
 		84CAC2D51D9B50D2001BCD1F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = YH;
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = com.yihe;
@@ -125,7 +179,6 @@
 			files = (
 				84CAC2EB1D9B50D2001BCD1F /* LaunchScreen.storyboard in Resources */,
 				84CAC2E81D9B50D2001BCD1F /* Assets.xcassets in Resources */,
-				84CAC2E61D9B50D2001BCD1F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,14 +197,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		84CAC2E41D9B50D2001BCD1F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				84CAC2E51D9B50D2001BCD1F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		84CAC2E91D9B50D2001BCD1F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -250,10 +295,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DayDayNews/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yihe.DayDayNews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -261,10 +309,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DayDayNews/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yihe.DayDayNews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
