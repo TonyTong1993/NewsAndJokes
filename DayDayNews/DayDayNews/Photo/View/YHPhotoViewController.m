@@ -7,8 +7,11 @@
 //
 
 #import "YHPhotoViewController.h"
-
-@interface YHPhotoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+#import "AFNetworking.h"
+@interface YHPhotoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>{
+    int pn,rn;
+    NSString *_tag1,*_tag2;
+}
 @property (nonatomic,strong) UICollectionView *collectionView;
 @property (nonatomic,strong) UIRefreshControl *refreshControl;
 @property (nonatomic,copy)   NSMutableArray   *dataSources;
@@ -65,6 +68,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupView];
+    pn = 0,rn = 60;
+    _tag1 = @"美女";
+    _tag2 = @"小清新";
+    [self initNetWorking];
 }
 #pragma mark---获取数据
 -(void)loadData{
@@ -91,7 +98,27 @@
         [_collectionView reloadData];
     });
     }
- 
+}
+
+-(void)initNetWorking{//http://image.baidu.com/wisebrowse/data?tag1=美女&tag2=小清新&pn=0&rn=60
+    NSString *urlStr = [[NSString stringWithFormat:@"http://image.baidu.com/wisebrowse/data?tag1=%@&tag2=%@",_tag1,_tag2 ] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"pn"] = @(pn);
+    parameters[@"rn"] = @(rn);
+    AFHTTPSessionManager *mgr =[AFHTTPSessionManager manager];
+    mgr.responseSerializer = [AFJSONResponseSerializer serializer];
+    [mgr.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json",@"text/html",@"text/json",@"text/javascript",@"application/javascript", nil]];
+    [[mgr GET:urlStr parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"responseObject---%@",responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+         NSLog(@"responseObject---%@",[error localizedDescription]);
+    }] resume];
+}
+-(void)loadNewData{
+    
+}
+-(void)loadMoreData{
+    
 }
 #pragma mark---设置界面
 -(void)setupView{
