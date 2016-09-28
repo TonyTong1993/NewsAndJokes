@@ -8,30 +8,44 @@
 
 #import "YHPhotoViewController.h"
 
-@interface YHPhotoViewController ()
+@interface YHPhotoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
 @end
-
+#define CellID @"cell"
 @implementation YHPhotoViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self setupView];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark---设置界面
+-(void)setupView{
+    CGRect rect = [UIScreen mainScreen].bounds;
+    //指明流水布局
+   UICollectionView *collectionView = [[UICollectionView alloc]initWithFrame:rect collectionViewLayout:[[UICollectionViewFlowLayout alloc]init]];
+    collectionView.delegate = self;
+    collectionView.dataSource = self;
+    collectionView.backgroundColor = [UIColor blackColor];
+    //注册class
+    [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:CellID];
+    [self.view addSubview:collectionView];
+    //设置collectionView 边距
+   UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout*)collectionView.collectionViewLayout;
+   layout.minimumLineSpacing = 5.0f;
+    //设置item的尺寸
+   layout.itemSize = CGSizeMake(100, 100);
+    //指明滑动方向
+   layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark---UICollectionViewDataSource
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return 20;
 }
-*/
-
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+   UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellID forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor redColor];
+    return cell;
+}
 @end

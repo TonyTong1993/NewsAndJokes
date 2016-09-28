@@ -168,7 +168,7 @@
 				TargetAttributes = {
 					84CAC2DC1D9B50D2001BCD1F = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 38F7LYX36Q;
+						DevelopmentTeam = 282ETXFM23;
 					};
 				};
 			};
@@ -322,7 +322,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yihe.DayDayNews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "3f25966a-6873-470d-a301-abb5e1fe456c";
 				SWIFT_OBJC_BRIDGING_HEADER = "DayDayNews/Photo/DayDayNews-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -339,7 +339,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yihe.DayDayNews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "3f25966a-6873-470d-a301-abb5e1fe456c";
 				SWIFT_OBJC_BRIDGING_HEADER = "DayDayNews/Photo/DayDayNews-Bridging-Header.h";
 			};
 			name = Release;
