@@ -21,17 +21,25 @@
         _collectionView = [[UICollectionView alloc]initWithFrame:rect collectionViewLayout:[[UICollectionViewFlowLayout alloc]init]];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.backgroundColor = [UIColor blackColor];
+        _collectionView.backgroundColor = [UIColor whiteColor];
         //注册class
         [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:CellID];
         //设置collectionView 边距
         UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout*)_collectionView.collectionViewLayout;
         //items 之间上下间距
         layout.minimumLineSpacing = 5.0f;
+         //items 调控items 之间左右最小边距
+        layout.minimumInteritemSpacing = 5.0f;
+      CGFloat screenW = [UIScreen mainScreen].bounds.size.width;
+        /* screenW = spacing *3 + itemW *2
+         itemW = (screenW -spacing *3)/2
+         */
         //设置item的尺寸
-        layout.itemSize = CGSizeMake(100, 100);
+        CGFloat itemW = (screenW -5.0f *3)/2.0f;
+        layout.itemSize = CGSizeMake(itemW, itemW*1.2);
         //指明滑动方向
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+        layout.sectionInset = UIEdgeInsetsMake(5.0f, 5.0f, 5.0f, 5.0f);
     }
     return _collectionView;
 }
@@ -69,5 +77,9 @@
    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellID forIndexPath:indexPath];
     cell.backgroundColor = [UIColor redColor];
     return cell;
+}
+//添加上拉无缝数据加载
+-(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
+    
 }
 @end
