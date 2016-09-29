@@ -1,5 +1,5 @@
 //
-//  YHWaterFallFlowLayout.h
+//  YHCollectionViewCell.h
 //  DayDayNews
 //
 //  Created by 马卿 on 16/9/29.
@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface YHWaterFallFlowLayout : UICollectionViewFlowLayout
-
+@class YHPhoto;
+@interface YHCollectionViewCell : UICollectionViewCell
+@property (nonatomic,strong) YHPhoto *photo ;
 @end

@@ -15,4 +15,5 @@
 @property (nonatomic, copy) NSString *small_url;
 @property (nonatomic, copy) NSString *small_width;
 @property (nonatomic, copy) NSString *small_height;
+@property (nonatomic, copy) NSString *title;
 @end

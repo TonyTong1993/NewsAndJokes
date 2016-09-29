@@ -10,9 +10,13 @@
 #import "AFNetworking.h"
 #import "YHPhoto.h"
 #import "UIImageView+WebCache.h"
-@interface YHPhotoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>{
+#import "HMWaterflowLayout.h"
+#import "SDImageCache.h"
+#import "YHCollectionViewCell.h"
+@interface YHPhotoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,HMWaterflowLayoutDelegate>{
     int pn,rn;
     NSString *_tag1,*_tag2;
+    CGFloat _itemW;
 }
 @property (nonatomic,strong) UICollectionView *collectionView;
 @property (nonatomic,strong) UIRefreshControl *refreshControl;
@@ -25,28 +29,28 @@
 -(UICollectionView *)collectionView{
     if (!_collectionView) {
           CGRect rect = [UIScreen mainScreen].bounds;
-        _collectionView = [[UICollectionView alloc]initWithFrame:rect collectionViewLayout:[[UICollectionViewFlowLayout alloc]init]];
+        HMWaterflowLayout *hmLayout = [[HMWaterflowLayout alloc] init];
+        _collectionView = [[UICollectionView alloc]initWithFrame:rect collectionViewLayout:hmLayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor whiteColor];
         //注册class
-        [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:CellID];
+        [_collectionView registerNib:[UINib nibWithNibName:@"YHCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:CellID];
         //设置collectionView 边距
-        UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout*)_collectionView.collectionViewLayout;
         //items 之间上下间距
-        layout.minimumLineSpacing = 5.0f;
+        hmLayout.columnMargin = 5.0f;
          //items 调控items 之间左右最小边距
-        layout.minimumInteritemSpacing = 5.0f;
+        hmLayout.columnMargin = 5.0f;
       CGFloat screenW = [UIScreen mainScreen].bounds.size.width;
         /* screenW = spacing *3 + itemW *2
          itemW = (screenW -spacing *3)/2
          */
         //设置item的尺寸
         CGFloat itemW = (screenW -5.0f *3)/2.0f;
-        layout.itemSize = CGSizeMake(itemW, itemW*1.2);
-        //指明滑动方向
-        layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        layout.sectionInset = UIEdgeInsetsMake(5.0f, 5.0f, 5.0f, 5.0f);
+        _itemW = itemW;
+        hmLayout.columnsCount = 2;
+        hmLayout.sectionInset = UIEdgeInsetsMake(5.0f, 5.0f, 5.0f, 5.0f);
+        hmLayout.delegate = self;
     }
     return _collectionView;
 }
@@ -72,12 +76,15 @@
     _tag2 = @"小清新";
     [self initNetWorking];
 }
+-(BOOL)prefersStatusBarHidden{
+    return YES;
+}
 #pragma mark---获取数据
 -(void)loadData{
     if (self.isPullUp) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             for (int i = 0; i < 10; i++) {
-                [self.dataSources addObject:@(i)];
+                //[self.dataSources addObject:@(i)];
             }
             NSLog(@"完成上拉刷新数据");
             //关闭刷新控件
@@ -89,7 +96,7 @@
            //模拟延迟加载数据
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         for (int i = 0; i < 10; i++) {
-            [self.dataSources insertObject:@(i) atIndex:0];
+            //[self.dataSources insertObject:@(i) atIndex:0];
         }
         //关闭刷新控件
         [_refreshControl endRefreshing];
@@ -104,6 +111,9 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"pn"] = @(pn);
     parameters[@"rn"] = @(rn);
+    [self HttpTool:urlStr parameters:parameters];
+}
+-(void)HttpTool:(NSString *)urlStr parameters:(NSDictionary *)parameters{
     AFHTTPSessionManager *mgr =[AFHTTPSessionManager manager];
     mgr.responseSerializer = [AFJSONResponseSerializer serializer];
     [mgr.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json",@"text/html",@"text/json",@"text/javascript",@"application/javascript", nil]];
@@ -112,16 +122,17 @@
         NSArray *imgs = responseObject[@"imgs"];
         for (NSDictionary *imgInfo in imgs) {
             YHPhoto *photo = [YHPhoto new];
-          photo.small_url =  [imgInfo valueForKeyPath:@"small_url"];
-          photo.small_width =  [imgInfo valueForKeyPath:@"small_width"];
-          photo.small_height =  [imgInfo valueForKeyPath:@"small_height"];
-         [photos addObject:photo];
+             //YHPhoto *photo = [YHPhoto modelWithDictionary:imgInfo];
+            photo.small_url =  [imgInfo valueForKeyPath:@"small_url"];
+            photo.small_width =  [imgInfo valueForKeyPath:@"small_width"];
+            photo.small_height =  [imgInfo valueForKeyPath:@"small_height"];
+            photo.title = [imgInfo valueForKeyPath:@"title"];
+            [photos addObject:photo];
         }
-        _dataSources = nil;
         self.dataSources = photos;
         [self.collectionView reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-         NSLog(@"responseObject---%@",[error localizedDescription]);
+        NSLog(@"responseObject---%@",[error localizedDescription]);
     }] resume];
 }
 -(void)loadNewData{
@@ -140,20 +151,14 @@
     return self.dataSources.count;
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-   UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellID forIndexPath:indexPath];
+   YHCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellID forIndexPath:indexPath];
     return cell;
 }
 #pragma mark---UICollectionViewDelegate
 //添加上拉无缝数据加载
--(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
+-(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(YHCollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
     YHPhoto *photo = self.dataSources[indexPath.row];
-    
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:cell.bounds];
-    [imageView    sd_setImageWithURL:
-     [NSURL URLWithString:photo.small_url]
-                    placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
-    [cell.contentView addSubview:imageView];
-    
+    cell.photo = photo;
     NSInteger section = collectionView.numberOfSections;
     NSInteger items = [collectionView numberOfItemsInSection:section - 1]-1;
     NSInteger row = indexPath.item;
@@ -161,10 +166,20 @@
         return;
     }
     if (items == row) {
-        self.isPullUp = YES;
-       [self loadData];
+        //self.isPullUp = YES;
+       //[self loadData];
     }
     
 }
-
+#pragma mark---HMWaterflowLayoutDelegate
+-(CGFloat)waterflowLayout:(HMWaterflowLayout *)waterflowLayout heightForWidth:(CGFloat)width atIndexPath:(NSIndexPath *)indexPath{
+    YHPhoto *photo = self.dataSources[indexPath.row];
+    CGFloat originH = [photo.small_height floatValue];
+    CGFloat originW = [photo.small_width floatValue];
+    CGFloat originS = originW/originH;
+    /*itemW/itemH = originS */
+    CGFloat itemH = _itemW/originS;
+   
+    return itemH;
+}
 @end
