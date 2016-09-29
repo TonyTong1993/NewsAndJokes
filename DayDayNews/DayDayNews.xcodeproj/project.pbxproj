@@ -15,6 +15,7 @@
 		84635E8D1D9D15B9008B3B7D /* HMWaterflowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 84635E8C1D9D15B9008B3B7D /* HMWaterflowLayout.m */; };
 		84635E911D9D2BA1008B3B7D /* YHCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84635E8F1D9D2BA1008B3B7D /* YHCollectionViewCell.m */; };
 		84635E921D9D2BA1008B3B7D /* YHCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84635E901D9D2BA1008B3B7D /* YHCollectionViewCell.xib */; };
+		84635E971D9D3CE4008B3B7D /* YHHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 84635E961D9D3CE4008B3B7D /* YHHttpTool.m */; };
 		84CAC2E11D9B50D2001BCD1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CAC2E01D9B50D2001BCD1F /* AppDelegate.swift */; };
 		84CAC2E31D9B50D2001BCD1F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CAC2E21D9B50D2001BCD1F /* ViewController.swift */; };
 		84CAC2E81D9B50D2001BCD1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84CAC2E71D9B50D2001BCD1F /* Assets.xcassets */; };
@@ -36,6 +37,8 @@
 		84635E8E1D9D2BA1008B3B7D /* YHCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHCollectionViewCell.h; sourceTree = "<group>"; };
 		84635E8F1D9D2BA1008B3B7D /* YHCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YHCollectionViewCell.m; sourceTree = "<group>"; };
 		84635E901D9D2BA1008B3B7D /* YHCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YHCollectionViewCell.xib; sourceTree = "<group>"; };
+		84635E951D9D3CE4008B3B7D /* YHHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHHttpTool.h; sourceTree = "<group>"; };
+		84635E961D9D3CE4008B3B7D /* YHHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YHHttpTool.m; sourceTree = "<group>"; };
 		84CAC2DD1D9B50D2001BCD1F /* DayDayNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayDayNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84CAC2E01D9B50D2001BCD1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84CAC2E21D9B50D2001BCD1F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +125,8 @@
 		84635E891D9D130C008B3B7D /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				84635E951D9D3CE4008B3B7D /* YHHttpTool.h */,
+				84635E961D9D3CE4008B3B7D /* YHHttpTool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -360,6 +365,7 @@
 				84635E751D9C9ED1008B3B7D /* YHPhoto.m in Sources */,
 				84635E8D1D9D15B9008B3B7D /* HMWaterflowLayout.m in Sources */,
 				84CAC2E11D9B50D2001BCD1F /* AppDelegate.swift in Sources */,
+				84635E971D9D3CE4008B3B7D /* YHHttpTool.m in Sources */,
 				84635E911D9D2BA1008B3B7D /* YHCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

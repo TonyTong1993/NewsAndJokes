@@ -13,6 +13,7 @@
 #import "HMWaterflowLayout.h"
 #import "SDImageCache.h"
 #import "YHCollectionViewCell.h"
+#import "YHHttpTool.h"
 @interface YHPhotoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,HMWaterflowLayoutDelegate>{
     int pn,rn;
     NSString *_tag1,*_tag2;
@@ -114,26 +115,20 @@
     [self HttpTool:urlStr parameters:parameters];
 }
 -(void)HttpTool:(NSString *)urlStr parameters:(NSDictionary *)parameters{
-    AFHTTPSessionManager *mgr =[AFHTTPSessionManager manager];
-    mgr.responseSerializer = [AFJSONResponseSerializer serializer];
-    [mgr.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json",@"text/html",@"text/json",@"text/javascript",@"application/javascript", nil]];
-    [[mgr GET:urlStr parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
+    [YHHttpTool GET:urlStr parameters:parameters success:^(NSDictionary *responseObject) {
         NSMutableArray *photos = [NSMutableArray array];
-        NSArray *imgs = responseObject[@"imgs"];
-        for (NSDictionary *imgInfo in imgs) {
-            YHPhoto *photo = [YHPhoto new];
-             //YHPhoto *photo = [YHPhoto modelWithDictionary:imgInfo];
-            photo.small_url =  [imgInfo valueForKeyPath:@"small_url"];
-            photo.small_width =  [imgInfo valueForKeyPath:@"small_width"];
-            photo.small_height =  [imgInfo valueForKeyPath:@"small_height"];
-            photo.title = [imgInfo valueForKeyPath:@"title"];
-            [photos addObject:photo];
-        }
-        self.dataSources = photos;
-        [self.collectionView reloadData];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"responseObject---%@",[error localizedDescription]);
-    }] resume];
+                NSArray *imgs = responseObject[@"imgs"];
+                for (NSDictionary *imgInfo in imgs) {
+                    YHPhoto *photo = [YHPhoto new];
+                    photo.small_url =  [imgInfo valueForKeyPath:@"small_url"];
+                    photo.small_width =  [imgInfo valueForKeyPath:@"small_width"];
+                    photo.small_height =  [imgInfo valueForKeyPath:@"small_height"];
+                    photo.title = [imgInfo valueForKeyPath:@"title"];
+                    [photos addObject:photo];
+                }
+                self.dataSources = photos;
+                [self.collectionView reloadData];
+    }];
 }
 -(void)loadNewData{
   
