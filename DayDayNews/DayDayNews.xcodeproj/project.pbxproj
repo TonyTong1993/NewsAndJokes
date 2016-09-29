@@ -12,6 +12,7 @@
 		84186F911D9BDC9600956F03 /* YHPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84186F901D9BDC9600956F03 /* YHPhotoViewController.m */; };
 		84635E751D9C9ED1008B3B7D /* YHPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 84635E741D9C9ED1008B3B7D /* YHPhoto.m */; };
 		84635E771D9CB3F3008B3B7D /* placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84635E761D9CB3F3008B3B7D /* placeholder.jpg */; };
+		84635E7B1D9CBA03008B3B7D /* YHWaterFallFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 84635E7A1D9CBA03008B3B7D /* YHWaterFallFlowLayout.m */; };
 		84CAC2E11D9B50D2001BCD1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CAC2E01D9B50D2001BCD1F /* AppDelegate.swift */; };
 		84CAC2E31D9B50D2001BCD1F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CAC2E21D9B50D2001BCD1F /* ViewController.swift */; };
 		84CAC2E81D9B50D2001BCD1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84CAC2E71D9B50D2001BCD1F /* Assets.xcassets */; };
@@ -28,6 +29,8 @@
 		84635E731D9C9ED1008B3B7D /* YHPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHPhoto.h; sourceTree = "<group>"; };
 		84635E741D9C9ED1008B3B7D /* YHPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YHPhoto.m; sourceTree = "<group>"; };
 		84635E761D9CB3F3008B3B7D /* placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholder.jpg; sourceTree = "<group>"; };
+		84635E791D9CBA03008B3B7D /* YHWaterFallFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHWaterFallFlowLayout.h; sourceTree = "<group>"; };
+		84635E7A1D9CBA03008B3B7D /* YHWaterFallFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YHWaterFallFlowLayout.m; sourceTree = "<group>"; };
 		84CAC2DD1D9B50D2001BCD1F /* DayDayNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayDayNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84CAC2E01D9B50D2001BCD1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84CAC2E21D9B50D2001BCD1F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +64,7 @@
 		84186F831D9BB6CE00956F03 /* Photo */ = {
 			isa = PBXGroup;
 			children = (
+				84635E781D9CB91F008B3B7D /* ViewModel */,
 				84186F8E1D9BDC9600956F03 /* View */,
 				84186F8D1D9BDC7300956F03 /* Model */,
 				84186F891D9BB86800956F03 /* DayDayNews-Bridging-Header.h */,
@@ -99,6 +103,15 @@
 				84186F901D9BDC9600956F03 /* YHPhotoViewController.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		84635E781D9CB91F008B3B7D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				84635E791D9CBA03008B3B7D /* YHWaterFallFlowLayout.h */,
+				84635E7A1D9CBA03008B3B7D /* YHWaterFallFlowLayout.m */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		84CAC2D41D9B50D2001BCD1F = {
@@ -308,6 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84186F911D9BDC9600956F03 /* YHPhotoViewController.m in Sources */,
+				84635E7B1D9CBA03008B3B7D /* YHWaterFallFlowLayout.m in Sources */,
 				84186F851D9BB75C00956F03 /* YHBaseViewController.swift in Sources */,
 				84CAC2E31D9B50D2001BCD1F /* ViewController.swift in Sources */,
 				84635E751D9C9ED1008B3B7D /* YHPhoto.m in Sources */,

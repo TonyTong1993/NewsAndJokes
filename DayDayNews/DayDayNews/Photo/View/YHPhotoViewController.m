@@ -141,20 +141,21 @@
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellID forIndexPath:indexPath];
-    YHPhoto *photo = self.dataSources[indexPath.row];
-   
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:cell.bounds];
-    [imageView    sd_setImageWithURL:
-     [NSURL URLWithString:photo.small_url]
-                                  placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
-    [cell.contentView addSubview:imageView];
     return cell;
 }
 #pragma mark---UICollectionViewDelegate
 //添加上拉无缝数据加载
 -(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
+    YHPhoto *photo = self.dataSources[indexPath.row];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:cell.bounds];
+    [imageView    sd_setImageWithURL:
+     [NSURL URLWithString:photo.small_url]
+                    placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+    [cell.contentView addSubview:imageView];
+    
     NSInteger section = collectionView.numberOfSections;
-    NSInteger items = _dataSources.count-1;
+    NSInteger items = [collectionView numberOfItemsInSection:section - 1]-1;
     NSInteger row = indexPath.item;
     if (section == 0 || items == 0) {
         return;
