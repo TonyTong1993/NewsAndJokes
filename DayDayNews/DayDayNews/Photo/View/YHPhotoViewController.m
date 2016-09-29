@@ -8,6 +8,8 @@
 
 #import "YHPhotoViewController.h"
 #import "AFNetworking.h"
+#import "YHPhoto.h"
+#import "UIImageView+WebCache.h"
 @interface YHPhotoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>{
     int pn,rn;
     NSString *_tag1,*_tag2;
@@ -58,9 +60,6 @@
 -(NSMutableArray *)dataSources{
     if (!_dataSources) {
         _dataSources = [[NSMutableArray alloc] init];
-        for (int i = 0; i < 6; i++) {
-            [_dataSources addObject:@(i)];
-        }
     }
     return _dataSources;
 }
@@ -101,21 +100,32 @@
 }
 
 -(void)initNetWorking{//http://image.baidu.com/wisebrowse/data?tag1=美女&tag2=小清新&pn=0&rn=60
-    NSString *urlStr = [[NSString stringWithFormat:@"http://image.baidu.com/wisebrowse/data?tag1=%@&tag2=%@",_tag1,_tag2 ] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *urlStr = [[NSString stringWithFormat:@"http://image.baidu.com/wisebrowse/data?tag1=%@&tag2=%@",_tag1,_tag2 ] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"pn"] = @(pn);
     parameters[@"rn"] = @(rn);
     AFHTTPSessionManager *mgr =[AFHTTPSessionManager manager];
     mgr.responseSerializer = [AFJSONResponseSerializer serializer];
     [mgr.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json",@"text/html",@"text/json",@"text/javascript",@"application/javascript", nil]];
-    [[mgr GET:urlStr parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"responseObject---%@",responseObject);
+    [[mgr GET:urlStr parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
+        NSMutableArray *photos = [NSMutableArray array];
+        NSArray *imgs = responseObject[@"imgs"];
+        for (NSDictionary *imgInfo in imgs) {
+            YHPhoto *photo = [YHPhoto new];
+          photo.small_url =  [imgInfo valueForKeyPath:@"small_url"];
+          photo.small_width =  [imgInfo valueForKeyPath:@"small_width"];
+          photo.small_height =  [imgInfo valueForKeyPath:@"small_height"];
+         [photos addObject:photo];
+        }
+        _dataSources = nil;
+        self.dataSources = photos;
+        [self.collectionView reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
          NSLog(@"responseObject---%@",[error localizedDescription]);
     }] resume];
 }
 -(void)loadNewData{
-    
+  
 }
 -(void)loadMoreData{
     
@@ -131,9 +141,16 @@
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellID forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor redColor];
+    YHPhoto *photo = self.dataSources[indexPath.row];
+   
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:cell.bounds];
+    [imageView    sd_setImageWithURL:
+     [NSURL URLWithString:photo.small_url]
+                                  placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+    [cell.contentView addSubview:imageView];
     return cell;
 }
+#pragma mark---UICollectionViewDelegate
 //添加上拉无缝数据加载
 -(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger section = collectionView.numberOfSections;
@@ -148,4 +165,5 @@
     }
     
 }
+
 @end
