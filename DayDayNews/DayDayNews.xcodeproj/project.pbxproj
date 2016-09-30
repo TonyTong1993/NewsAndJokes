@@ -27,11 +27,6 @@
 		8464238D1D9E5B0E00263FB1 /* YHPhotoPickerBrowserPhotoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846423821D9E5B0E00263FB1 /* YHPhotoPickerBrowserPhotoScrollView.m */; };
 		8464238E1D9E5B0E00263FB1 /* YHPhotoPickerBrowserPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846423841D9E5B0E00263FB1 /* YHPhotoPickerBrowserPhotoView.m */; };
 		846423911D9E61A800263FB1 /* UIView+XMGExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 846423901D9E61A800263FB1 /* UIView+XMGExtension.m */; };
-		8464239B1D9E61E900263FB1 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 846423931D9E61E900263FB1 /* LICENSE.txt */; };
-		8464239C1D9E61E900263FB1 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 846423941D9E61E900263FB1 /* README.md */; };
-		8464239D1D9E61E900263FB1 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846423971D9E61E900263FB1 /* SVIndefiniteAnimatedView.m */; };
-		8464239E1D9E61E900263FB1 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 846423981D9E61E900263FB1 /* SVProgressHUD.bundle */; };
-		8464239F1D9E61E900263FB1 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8464239A1D9E61E900263FB1 /* SVProgressHUD.m */; };
 		84CAC2E11D9B50D2001BCD1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CAC2E01D9B50D2001BCD1F /* AppDelegate.swift */; };
 		84CAC2E31D9B50D2001BCD1F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CAC2E21D9B50D2001BCD1F /* ViewController.swift */; };
 		84CAC2E81D9B50D2001BCD1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84CAC2E71D9B50D2001BCD1F /* Assets.xcassets */; };
@@ -77,13 +72,6 @@
 		846423841D9E5B0E00263FB1 /* YHPhotoPickerBrowserPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YHPhotoPickerBrowserPhotoView.m; sourceTree = "<group>"; };
 		8464238F1D9E61A800263FB1 /* UIView+XMGExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+XMGExtension.h"; path = "../../UIView+XMGExtension.h"; sourceTree = "<group>"; };
 		846423901D9E61A800263FB1 /* UIView+XMGExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+XMGExtension.m"; path = "../../UIView+XMGExtension.m"; sourceTree = "<group>"; };
-		846423931D9E61E900263FB1 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		846423941D9E61E900263FB1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		846423961D9E61E900263FB1 /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
-		846423971D9E61E900263FB1 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
-		846423981D9E61E900263FB1 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
-		846423991D9E61E900263FB1 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
-		8464239A1D9E61E900263FB1 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		84CAC2DD1D9B50D2001BCD1F /* DayDayNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayDayNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84CAC2E01D9B50D2001BCD1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84CAC2E21D9B50D2001BCD1F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -222,7 +210,6 @@
 			children = (
 				8464238F1D9E61A800263FB1 /* UIView+XMGExtension.h */,
 				846423901D9E61A800263FB1 /* UIView+XMGExtension.m */,
-				846423921D9E61E900263FB1 /* SVProgressHUD */,
 				846423701D9E5B0E00263FB1 /* DACircularProgress */,
 			);
 			path = Lib;
@@ -265,29 +252,6 @@
 				846423841D9E5B0E00263FB1 /* YHPhotoPickerBrowserPhotoView.m */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		846423921D9E61E900263FB1 /* SVProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				846423931D9E61E900263FB1 /* LICENSE.txt */,
-				846423941D9E61E900263FB1 /* README.md */,
-				846423951D9E61E900263FB1 /* SVProgressHUD */,
-			);
-			name = SVProgressHUD;
-			path = ../../SVProgressHUD;
-			sourceTree = "<group>";
-		};
-		846423951D9E61E900263FB1 /* SVProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				846423961D9E61E900263FB1 /* SVIndefiniteAnimatedView.h */,
-				846423971D9E61E900263FB1 /* SVIndefiniteAnimatedView.m */,
-				846423981D9E61E900263FB1 /* SVProgressHUD.bundle */,
-				846423991D9E61E900263FB1 /* SVProgressHUD.h */,
-				8464239A1D9E61E900263FB1 /* SVProgressHUD.m */,
-			);
-			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
 		84CAC2D41D9B50D2001BCD1F = {
@@ -437,10 +401,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				84CAC2EB1D9B50D2001BCD1F /* LaunchScreen.storyboard in Resources */,
-				8464239E1D9E61E900263FB1 /* SVProgressHUD.bundle in Resources */,
 				84635E921D9D2BA1008B3B7D /* YHCollectionViewCell.xib in Resources */,
 				84635E771D9CB3F3008B3B7D /* placeholder.jpg in Resources */,
-				8464239B1D9E61E900263FB1 /* LICENSE.txt in Resources */,
 				84CAC2E81D9B50D2001BCD1F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -502,14 +464,11 @@
 			files = (
 				84186F911D9BDC9600956F03 /* YHPhotoViewController.m in Sources */,
 				846423881D9E5B0E00263FB1 /* YHPhotoBrowserPhoto.m in Sources */,
-				8464239C1D9E61E900263FB1 /* README.md in Sources */,
 				846423911D9E61A800263FB1 /* UIView+XMGExtension.m in Sources */,
 				846423891D9E5B0E00263FB1 /* YHPhotoPickerDatas.m in Sources */,
-				8464239D1D9E61E900263FB1 /* SVIndefiniteAnimatedView.m in Sources */,
 				846423851D9E5B0E00263FB1 /* YHPhotoPickerBrowserViewController.m in Sources */,
 				8464238E1D9E5B0E00263FB1 /* YHPhotoPickerBrowserPhotoView.m in Sources */,
 				8464238D1D9E5B0E00263FB1 /* YHPhotoPickerBrowserPhotoScrollView.m in Sources */,
-				8464239F1D9E61E900263FB1 /* SVProgressHUD.m in Sources */,
 				8464238C1D9E5B0E00263FB1 /* YHPhotoPickerBrowserPhotoImageView.m in Sources */,
 				84186F851D9BB75C00956F03 /* YHBaseViewController.swift in Sources */,
 				8464238A1D9E5B0E00263FB1 /* YHPhotoPickerGroup.m in Sources */,

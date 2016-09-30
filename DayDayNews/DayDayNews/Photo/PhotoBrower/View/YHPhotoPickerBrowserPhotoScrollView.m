@@ -8,7 +8,6 @@
 
 #import "YHPhotoPickerBrowserPhotoScrollView.h"
 #import "DACircularProgressView.h"
-#import "SVProgressHUD.h"
 #import "UIImageView+WebCache.h"
 #import "YHPhotoRect.h"
 #import "YHPhotoPickerBrowserPhotoView.h"
@@ -98,11 +97,11 @@ static NSInteger const LGPickerProgressViewH = 50;
     self.progressView.hidden = NO;
     if (progress == 0) return ;
     if (progress / 1.0 != 1.0) {
-        [SVProgressHUD showProgress:progress maskType:SVProgressHUDMaskTypeNone];
-        //[self.progressView setProgress:progress animated:YES];
+       
+        [self.progressView setProgress:progress animated:YES];
     }else{
         dispatch_async(dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
+           
            [self.progressView removeFromSuperview];
             self.progressView = nil;
         });
