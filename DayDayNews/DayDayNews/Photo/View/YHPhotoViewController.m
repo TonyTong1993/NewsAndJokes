@@ -15,12 +15,14 @@
 #import "YHCollectionViewCell.h"
 #import "YHHttpTool.h"
 #import "MJExtension.h"
+#import "YHPhotoPickerBrowserViewController.h"
+#import "YHPhotoBrowserPhoto.h"
 typedef  NS_ENUM (NSUInteger,LoadDataState){
     LoadDataStateInitNetWoring,
     LoadDataStateMoreData,
     LoadDataStateNewData,
 };
-@interface YHPhotoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,HMWaterflowLayoutDelegate>{
+@interface YHPhotoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,HMWaterflowLayoutDelegate,YHPhotoPickerBrowserViewControllerDataSource,YHPhotoPickerBrowserViewControllerDelegate>{
     int pn,rn;
     NSString *_tag1,*_tag2;
     CGFloat _itemW;
@@ -29,6 +31,7 @@ typedef  NS_ENUM (NSUInteger,LoadDataState){
 @property (nonatomic,strong) UIRefreshControl *refreshControl;
 @property (nonatomic,copy)   NSMutableArray   *dataSources;
 @property (nonatomic,assign) BOOL             isPullUp;
+@property (nonatomic,copy) NSMutableArray *photoArray ;
 @end
 #define CellID @"cell"
 @implementation YHPhotoViewController
@@ -169,7 +172,21 @@ typedef  NS_ENUM (NSUInteger,LoadDataState){
     }
     
 }
-
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+  YHPhotoPickerBrowserViewController *browserVC = [[YHPhotoPickerBrowserViewController alloc] init];
+    NSMutableArray *tmp = [NSMutableArray arrayWithCapacity:0];
+    for (YHPhoto *photo in self.dataSources) {
+        YHPhotoBrowserPhoto *browserPhoto = [[YHPhotoBrowserPhoto alloc] init];
+        browserPhoto.photoURL = [NSURL URLWithString:photo.image_url];
+        [tmp addObject:browserPhoto];
+    }
+    self.photoArray = tmp;
+    tmp = nil;
+    browserVC.dataSource = self;
+    browserVC.delegate = self;
+    browserVC.currentIndexPath = indexPath;
+    [self presentViewController:browserVC animated:YES completion:nil];
+}
 #pragma mark---HMWaterflowLayoutDelegate
 -(CGFloat)waterflowLayout:(HMWaterflowLayout *)waterflowLayout heightForWidth:(CGFloat)width atIndexPath:(NSIndexPath *)indexPath{
     YHPhoto *photo = self.dataSources[indexPath.row];
@@ -181,4 +198,12 @@ typedef  NS_ENUM (NSUInteger,LoadDataState){
    
     return itemH;
 }
+#pragma mark---YHPhotoPickerBrowserViewControllerDataSource
+-(NSInteger)photoBrowser:(YHPhotoPickerBrowserViewController *)photoBrowser numberOfItemsInSection:(NSUInteger)section{
+    return self.dataSources.count;
+}
+-(id<YHPhotoPickerBrowserPhoto>)photoBrowser:(YHPhotoPickerBrowserViewController *)pickerBrowser photoAtIndexPath:(NSIndexPath *)indexPath{
+    return self.photoArray[indexPath.row];
+}
+
 @end
