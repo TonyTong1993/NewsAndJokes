@@ -14,6 +14,12 @@
 #import "SDImageCache.h"
 #import "YHCollectionViewCell.h"
 #import "YHHttpTool.h"
+#import "MJExtension.h"
+typedef  NS_ENUM (NSUInteger,LoadDataState){
+    LoadDataStateInitNetWoring,
+    LoadDataStateMoreData,
+    LoadDataStateNewData,
+};
 @interface YHPhotoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,HMWaterflowLayoutDelegate>{
     int pn,rn;
     NSString *_tag1,*_tag2;
@@ -72,10 +78,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupView];
-    pn = 0,rn = 60;
+    pn = 0,rn = 30;
     _tag1 = @"美女";
     _tag2 = @"小清新";
-    [self initNetWorking];
+    [self initNetWorking:LoadDataStateInitNetWoring];
 }
 -(BOOL)prefersStatusBarHidden{
     return YES;
@@ -83,58 +89,51 @@
 #pragma mark---获取数据
 -(void)loadData{
     if (self.isPullUp) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            for (int i = 0; i < 10; i++) {
-                //[self.dataSources addObject:@(i)];
-            }
-            NSLog(@"完成上拉刷新数据");
-            //关闭刷新控件
-            self.isPullUp = false;
-            //刷新数据
-            [_collectionView reloadData];
-        });
+        [self loadMoreData];
+        
     }else{
-           //模拟延迟加载数据
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        for (int i = 0; i < 10; i++) {
-            //[self.dataSources insertObject:@(i) atIndex:0];
-        }
-        //关闭刷新控件
-        [_refreshControl endRefreshing];
-        //刷新数据
-        [_collectionView reloadData];
-    });
+        [self loadNewData];
     }
 }
 
--(void)initNetWorking{//http://image.baidu.com/wisebrowse/data?tag1=美女&tag2=小清新&pn=0&rn=60
+-(void)initNetWorking:(LoadDataState)state{
     NSString *urlStr = [[NSString stringWithFormat:@"http://image.baidu.com/wisebrowse/data?tag1=%@&tag2=%@",_tag1,_tag2 ] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"pn"] = @(pn);
     parameters[@"rn"] = @(rn);
-    [self HttpTool:urlStr parameters:parameters];
+    [self HttpTool:urlStr parameters:parameters state:state];
 }
--(void)HttpTool:(NSString *)urlStr parameters:(NSDictionary *)parameters{
+-(void)HttpTool:(NSString *)urlStr parameters:(NSDictionary *)parameters state:(LoadDataState)state{
     [YHHttpTool GET:urlStr parameters:parameters success:^(NSDictionary *responseObject) {
-        NSMutableArray *photos = [NSMutableArray array];
                 NSArray *imgs = responseObject[@"imgs"];
-                for (NSDictionary *imgInfo in imgs) {
-                    YHPhoto *photo = [YHPhoto new];
-                    photo.small_url =  [imgInfo valueForKeyPath:@"small_url"];
-                    photo.small_width =  [imgInfo valueForKeyPath:@"small_width"];
-                    photo.small_height =  [imgInfo valueForKeyPath:@"small_height"];
-                    photo.title = [imgInfo valueForKeyPath:@"title"];
-                    [photos addObject:photo];
-                }
-                self.dataSources = photos;
-                [self.collectionView reloadData];
+      NSMutableArray *photos = [YHPhoto mj_objectArrayWithKeyValuesArray:imgs];
+        //设置pn 起始位置
+        pn += 30;
+        switch (state) {
+            case LoadDataStateInitNetWoring:
+             
+                break;
+            case LoadDataStateMoreData:
+                 [photos reverseObjectEnumerator];
+                //关闭刷新控件
+                self.isPullUp = false;
+                break;
+            case LoadDataStateNewData:
+                //关闭刷新控件
+                [_refreshControl endRefreshing];
+                break;
+            default:
+                break;
+        }
+         self.dataSources = photos;
+         [self.collectionView reloadData];
     }];
 }
 -(void)loadNewData{
-  
+    [self initNetWorking:LoadDataStateNewData];
 }
 -(void)loadMoreData{
-    
+    [self initNetWorking:LoadDataStateMoreData];
 }
 #pragma mark---设置界面
 -(void)setupView{
@@ -161,8 +160,8 @@
         return;
     }
     if (items == row) {
-        //self.isPullUp = YES;
-       //[self loadData];
+       self.isPullUp = YES;
+       [self loadData];
     }
     
 }
