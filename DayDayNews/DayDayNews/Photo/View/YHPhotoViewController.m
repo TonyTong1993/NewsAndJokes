@@ -89,9 +89,11 @@ typedef  NS_ENUM (NSUInteger,LoadDataState){
 #pragma mark---获取数据
 -(void)loadData{
     if (self.isPullUp) {
+
         [self loadMoreData];
         
     }else{
+       
         [self loadNewData];
     }
 }
@@ -108,24 +110,26 @@ typedef  NS_ENUM (NSUInteger,LoadDataState){
                 NSArray *imgs = responseObject[@"imgs"];
       NSMutableArray *photos = [YHPhoto mj_objectArrayWithKeyValuesArray:imgs];
         //设置pn 起始位置
-        pn += 30;
         switch (state) {
             case LoadDataStateInitNetWoring:
              
                 break;
             case LoadDataStateMoreData:
-                 [photos reverseObjectEnumerator];
                 //关闭刷新控件
+                rn += 30;
                 self.isPullUp = false;
                 break;
+                
             case LoadDataStateNewData:
                 //关闭刷新控件
+                 pn += 30;
                 [_refreshControl endRefreshing];
                 break;
             default:
                 break;
         }
-         self.dataSources = photos;
+        //设置数据源刷新表格数据
+          self.dataSources = photos;
          [self.collectionView reloadData];
     }];
 }
@@ -165,6 +169,7 @@ typedef  NS_ENUM (NSUInteger,LoadDataState){
     }
     
 }
+
 #pragma mark---HMWaterflowLayoutDelegate
 -(CGFloat)waterflowLayout:(HMWaterflowLayout *)waterflowLayout heightForWidth:(CGFloat)width atIndexPath:(NSIndexPath *)indexPath{
     YHPhoto *photo = self.dataSources[indexPath.row];
