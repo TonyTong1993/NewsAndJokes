@@ -83,7 +83,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         window = UIWindow()
         //window?.backgroundColor = UIColor.whiteColor()
-        let vc = YHPhotoViewController()
+        let vc = YHRootViewController()
+        vc.view.backgroundColor = UIColor.blueColor()
         window?.rootViewController = vc
         window?.makeKeyAndVisible()
         //初次进入需要注册shortcutItems
