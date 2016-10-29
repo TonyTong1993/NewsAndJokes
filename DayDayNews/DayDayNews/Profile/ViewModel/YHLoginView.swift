@@ -42,34 +42,6 @@ class YHLoginView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-//    var loginView:YHLoginView{
-//        let loginView = YHinit()
-//        // 添加子view
-//        avaterView = UIImageView()
-//        let icon = UIImage(named: "comment_profile_default")?.imageWithRenderingMode(.AlwaysOriginal);
-//        avaterView?.image = icon
-//        avaterView?.layer.cornerRadius = 35
-//        avaterView?.layer.masksToBounds = true
-//        titleLabel = UILabel()
-//        titleLabel?.text = "立即登录"
-//         titleLabel?.textColor = UIColor.whiteColor()
-//        avaterView?.translatesAutoresizingMaskIntoConstraints = false
-//        titleLabel?.translatesAutoresizingMaskIntoConstraints = false
-//        addSubview(avaterView!);
-//        addSubview(titleLabel!);
-//        //布局
-//        addConstraint(NSLayoutConstraint(item: avaterView!, attribute:.Top, relatedBy: .Equal, toItem: loginView, attribute: .Top, multiplier: 1.0, constant: 10));
-//        addConstraint(NSLayoutConstraint(item: avaterView!, attribute:.CenterX, relatedBy: .Equal, toItem: loginView, attribute: .CenterX, multiplier: 1.0, constant: 0));
-//        addConstraint(NSLayoutConstraint(item: avaterView!, attribute:.Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 70));
-//        addConstraint(NSLayoutConstraint(item: avaterView!, attribute:.Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 70));
-//        
-//        addConstraint(NSLayoutConstraint(item: titleLabel!, attribute:.Bottom, relatedBy: .Equal, toItem: loginView, attribute: .Bottom, multiplier: 1.0, constant: -10));
-//        addConstraint(NSLayoutConstraint(item: titleLabel!, attribute:.CenterX, relatedBy: .Equal, toItem: loginView, attribute: .CenterX, multiplier: 1.0, constant: 0));
-//        
-//        let tapGesture =  UITapGestureRecognizer(target: self, action: #selector(loginViewClicked))
-//        addGestureRecognizer(tapGesture);
-//        return loginView
-//    }
    @objc func loginViewClicked() {
         print("loginViewClicked")
     }
