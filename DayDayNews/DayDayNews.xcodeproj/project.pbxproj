@@ -30,7 +30,9 @@
 		8465B4F61DADCA5A006EB0CD /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8465B4F51DADCA5A006EB0CD /* UIColor+Extension.swift */; };
 		8465B4F81DADD52C006EB0CD /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8465B4F71DADD52C006EB0CD /* Bundle.swift */; };
 		8465B4FA1DADE3C6006EB0CD /* YHNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8465B4F91DADE3C6006EB0CD /* YHNavController.swift */; };
-		84A13BAD1DAD0723001A6CFC /* YHProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A13BAC1DAD0723001A6CFC /* YHProfileViewController.swift */; };
+		846AD3801DC444AA0076A788 /* YHProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AD37F1DC444AA0076A788 /* YHProfileViewController.swift */; };
+		846AD3831DC444EE0076A788 /* YHProfileHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AD3821DC444EE0076A788 /* YHProfileHeadView.swift */; };
+		846AD3851DC465800076A788 /* YHLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AD3841DC465800076A788 /* YHLoginView.swift */; };
 		84A13BAF1DAD0DB4001A6CFC /* YHRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A13BAE1DAD0DB4001A6CFC /* YHRootViewController.swift */; };
 		84A13BB31DAD0F4E001A6CFC /* YHNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A13BB21DAD0F4E001A6CFC /* YHNewsViewController.swift */; };
 		84A13BB81DAD0FA7001A6CFC /* YHVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A13BB71DAD0FA7001A6CFC /* YHVideoViewController.m */; };
@@ -82,7 +84,9 @@
 		8465B4F51DADCA5A006EB0CD /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		8465B4F71DADD52C006EB0CD /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		8465B4F91DADE3C6006EB0CD /* YHNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHNavController.swift; sourceTree = "<group>"; };
-		84A13BAC1DAD0723001A6CFC /* YHProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YHProfileViewController.swift; path = DayDayNews/YHProfileViewController.swift; sourceTree = SOURCE_ROOT; };
+		846AD37F1DC444AA0076A788 /* YHProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHProfileViewController.swift; sourceTree = "<group>"; };
+		846AD3821DC444EE0076A788 /* YHProfileHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHProfileHeadView.swift; sourceTree = "<group>"; };
+		846AD3841DC465800076A788 /* YHLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHLoginView.swift; sourceTree = "<group>"; };
 		84A13BAE1DAD0DB4001A6CFC /* YHRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHRootViewController.swift; sourceTree = "<group>"; };
 		84A13BB21DAD0F4E001A6CFC /* YHNewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHNewsViewController.swift; sourceTree = "<group>"; };
 		84A13BB61DAD0FA7001A6CFC /* YHVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHVideoViewController.h; sourceTree = "<group>"; };
@@ -273,6 +277,16 @@
 			path = Const;
 			sourceTree = "<group>";
 		};
+		846AD3811DC444D00076A788 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				846AD3821DC444EE0076A788 /* YHProfileHeadView.swift */,
+				846AD3841DC465800076A788 /* YHLoginView.swift */,
+			);
+			name = ViewModel;
+			path = Profile/ViewModel;
+			sourceTree = "<group>";
+		};
 		84A13BB01DAD0ECA001A6CFC /* News */ = {
 			isa = PBXGroup;
 			children = (
@@ -332,6 +346,7 @@
 				84A13BB01DAD0ECA001A6CFC /* News */,
 				84A13BB41DAD0F5F001A6CFC /* Video */,
 				84CAC2F21D9B562D001BCD1F /* Profile */,
+				846AD3811DC444D00076A788 /* ViewModel */,
 				84186F831D9BB6CE00956F03 /* Photo */,
 				84635E891D9D130C008B3B7D /* Tool */,
 				84CAC2E01D9B50D2001BCD1F /* AppDelegate.swift */,
@@ -349,7 +364,6 @@
 			children = (
 				84CAC2F31D9B562D001BCD1F /* Model */,
 				84CAC2F41D9B562D001BCD1F /* View */,
-				84CAC2F51D9B562D001BCD1F /* ViewModel */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -364,16 +378,9 @@
 		84CAC2F41D9B562D001BCD1F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				84A13BAC1DAD0723001A6CFC /* YHProfileViewController.swift */,
+				846AD37F1DC444AA0076A788 /* YHProfileViewController.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		84CAC2F51D9B562D001BCD1F /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		84CAC2F61D9B56B7001BCD1F /* Main */ = {
@@ -517,6 +524,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				846AD3831DC444EE0076A788 /* YHProfileHeadView.swift in Sources */,
 				84A13BB31DAD0F4E001A6CFC /* YHNewsViewController.swift in Sources */,
 				84A13BB81DAD0FA7001A6CFC /* YHVideoViewController.m in Sources */,
 				84186F911D9BDC9600956F03 /* YHPhotoViewController.m in Sources */,
@@ -524,8 +532,8 @@
 				846423911D9E61A800263FB1 /* UIView+XMGExtension.m in Sources */,
 				846423891D9E5B0E00263FB1 /* YHPhotoPickerDatas.m in Sources */,
 				846423851D9E5B0E00263FB1 /* YHPhotoPickerBrowserViewController.m in Sources */,
-				84A13BAD1DAD0723001A6CFC /* YHProfileViewController.swift in Sources */,
 				8464238E1D9E5B0E00263FB1 /* YHPhotoPickerBrowserPhotoView.m in Sources */,
+				846AD3851DC465800076A788 /* YHLoginView.swift in Sources */,
 				8464238D1D9E5B0E00263FB1 /* YHPhotoPickerBrowserPhotoScrollView.m in Sources */,
 				8464238C1D9E5B0E00263FB1 /* YHPhotoPickerBrowserPhotoImageView.m in Sources */,
 				84186F851D9BB75C00956F03 /* YHBaseViewController.swift in Sources */,
@@ -541,6 +549,7 @@
 				8464238B1D9E5B0E00263FB1 /* YHPhotoRect.m in Sources */,
 				8465B4FA1DADE3C6006EB0CD /* YHNavController.swift in Sources */,
 				84CAC2E11D9B50D2001BCD1F /* AppDelegate.swift in Sources */,
+				846AD3801DC444AA0076A788 /* YHProfileViewController.swift in Sources */,
 				84635E971D9D3CE4008B3B7D /* YHHttpTool.m in Sources */,
 				84635E911D9D2BA1008B3B7D /* YHCollectionViewCell.m in Sources */,
 			);

@@ -71,6 +71,10 @@ extension YHRootViewController {
             vc.tabBarItem = UITabBarItem(title: title, image: UIImage(named: iconName)?.imageWithRenderingMode(.AlwaysOriginal), selectedImage:selectedImage)
             let attributes = [NSForegroundColorAttributeName:UIColor(red: 249/255.0, green: 77/255.0, blue: 69/255.0, alpha: 1.0)]
             vc.tabBarItem.setTitleTextAttributes(attributes, forState: .Selected)
+            if (className as NSString).isEqualToString("YHProfileViewController") {
+                addChildViewController(vc);
+                return;
+            }
             let nav = YHNavController(rootViewController: vc);
             addChildViewController(nav)
           
