@@ -19,9 +19,6 @@ class YHProfileViewController: YHBaseViewController {
             print("collectionItem")
         }
         let nightModeItem =  YHSettingItem(icon: "handShake", title: "夜间模式", itemType: .switchAccessory)
-        nightModeItem.option = { _ in
-            print("nightModeItem")
-        }
         let firstItems = [collectionItem,nightModeItem]
         let helpItem = YHSettingItem(icon: "MoreHelp", title: "帮助与反馈", itemType: .arrowAccessory)
         helpItem.detialText = "0"
@@ -84,17 +81,8 @@ extension YHProfileViewController{
     
     @objc  override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let item = dataSource![indexPath.section].items[indexPath.row];
-        let cell = UITableViewCell(style: .Value1, reuseIdentifier: ID)
-        
-        cell.imageView?.image = UIImage(named: item.icon)
-        cell.textLabel?.text = item.title
-        cell.detailTextLabel?.text = item.detialText
-        switch item.itemType {
-        case .arrowAccessory:
-            cell.accessoryType = .DisclosureIndicator
-        default:
-            cell.accessoryView = UISwitch()
-        }
+        let cell = YHSettingCell(style: .Value1, reuseIdentifier: ID)
+        cell.item = item
         return cell;
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -104,7 +92,13 @@ extension YHProfileViewController{
             return
             
         }
-        option()
+        switch item.itemType {
+        case .arrowAccessory:
+            option()
+        default:
+            break
+        }
+        
     }
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1

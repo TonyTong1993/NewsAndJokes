@@ -21,6 +21,7 @@ class YHLoginView: UIView {
         avaterView?.layer.masksToBounds = true
         titleLabel = UILabel()
         titleLabel?.text = "立即登录"
+        titleLabel?.font = UIFont.systemFontOfSize(16)
         titleLabel?.textColor = UIColor.whiteColor()
         avaterView?.translatesAutoresizingMaskIntoConstraints = false
         titleLabel?.translatesAutoresizingMaskIntoConstraints = false
