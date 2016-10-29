@@ -64,12 +64,15 @@ extension YHRootViewController {
             guard let vc = tmpVC else{
                 return
             }
-            vc.view.backgroundColor = randomColor
-            var seletedIconName = iconName
+            //设置tabBarItem 图片，title
+           var seletedIconName = iconName
            seletedIconName = seletedIconName.stringByAppendingString("_hl")
             let selectedImage = UIImage(named:seletedIconName)?.imageWithRenderingMode(.AlwaysOriginal)
             vc.tabBarItem = UITabBarItem(title: title, image: UIImage(named: iconName)?.imageWithRenderingMode(.AlwaysOriginal), selectedImage:selectedImage)
-            addChildViewController(vc)
+            let attributes = [NSForegroundColorAttributeName:UIColor(red: 249/255.0, green: 77/255.0, blue: 69/255.0, alpha: 1.0)]
+            vc.tabBarItem.setTitleTextAttributes(attributes, forState: .Selected)
+            let nav = YHNavController(rootViewController: vc);
+            addChildViewController(nav)
           
         }
 

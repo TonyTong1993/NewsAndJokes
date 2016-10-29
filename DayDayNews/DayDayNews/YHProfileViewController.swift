@@ -9,5 +9,12 @@
 import UIKit
 
 class YHProfileViewController: YHBaseViewController {
-
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //设置导航栏
+       
+    }
+    override func setUpTableView() {
+        super.setUpTableView()
+    }
 }
