@@ -13,7 +13,8 @@
 #import "HMWaterflowLayout.h"
 #import "SDImageCache.h"
 #import "YHCollectionViewCell.h"
-#import "MJExtension.h"
+//#import "MJExtension.h"
+#import "NSObject+YYModel.h"
 #import "YHPhotoPickerBrowserViewController.h"
 #import "YHPhotoBrowserPhoto.h"
 typedef  NS_ENUM (NSUInteger,LoadDataState){
@@ -111,7 +112,11 @@ typedef  NS_ENUM (NSUInteger,LoadDataState){
 -(void)HttpTool:(NSString *)urlStr parameters:(NSDictionary *)parameters state:(LoadDataState)state{
     [YHHttpTool GET:urlStr parameters:parameters success:^(NSDictionary *responseObject) {
                 NSArray *imgs = responseObject[@"imgs"];
-      NSMutableArray *photos = [YHPhoto mj_objectArrayWithKeyValuesArray:imgs];
+        NSMutableArray *photos = [[NSMutableArray alloc] init];
+        for (NSDictionary *dic in imgs) {
+           YHPhoto *photo = [YHPhoto modelWithDictionary:dic];
+            [photos addObject:photo];
+        }
         //设置pn 起始位置
         switch (state) {
             case LoadDataStateInitNetWoring:

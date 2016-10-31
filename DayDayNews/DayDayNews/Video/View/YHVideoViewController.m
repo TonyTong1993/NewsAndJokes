@@ -9,13 +9,14 @@
 #import "YHVideoViewController.h"
 #import "YHVideoModel.h"
 #import "YHVideoNavViewCell.h"
+#import "YHVideoViewCell.h"
 @interface YHVideoViewController ()
 @property (nonatomic,assign) int count;
 @property (nonatomic,copy) NSMutableArray *dataSource;
 @end
 
 @implementation YHVideoViewController
-static NSString *ID = @"UICollectionViewCell";
+static NSString *ID = @"YHVideoViewCell";
 #pragma mark---Lazy load
 -(NSMutableArray *)dataSource{
     if (!_dataSource) {
@@ -32,7 +33,7 @@ static NSString *ID = @"UICollectionViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"视频";
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:ID];
+    [self.collectionView registerClass:[YHVideoViewCell class] forCellWithReuseIdentifier:ID];
     [self.collectionView registerNib:[UINib nibWithNibName:@"YHVideoNavViewCell" bundle:nil] forCellWithReuseIdentifier:@"VideoNavViewCell"];
     [self.collectionView setBackgroundColor:[UIColor grayColor]];
     [self loadData];
@@ -43,11 +44,12 @@ static NSString *ID = @"UICollectionViewCell";
     NSString *urlStr = [NSString stringWithFormat:@"http://c.m.163.com/nc/video/home/%d-10.html",self.count];
     NSDictionary *parameters = [NSDictionary dictionary];
     [YHHttpTool GET:urlStr parameters:parameters success:^(NSDictionary *success) {
-        NSLog(@"success = %@",success);
+         NSLog(@"success = %@",success);
         NSArray *videoList = success[@"videoList"];
         NSMutableArray *models = [[NSMutableArray alloc] init];
         for (NSDictionary *dic in videoList) {
          YHVideoModel *model =  [YHVideoModel modelWithDictionary:dic];
+            NSLog(@"model.title = %@",model.title);
             [models addObject:model];
         }
         self.dataSource = models;
@@ -56,6 +58,13 @@ static NSString *ID = @"UICollectionViewCell";
 }
 -(UICollectionViewCell *)yh_VideoNavView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     YHVideoNavViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"VideoNavViewCell" forIndexPath:indexPath];
+    return cell;
+}
+-(UICollectionViewCell *)yh_VideoView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    YHVideoModel *model = self.dataSource[indexPath.row];
+    YHVideoViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ID forIndexPath:indexPath];
+    
+    cell.model = model;
     return cell;
 }
 #pragma mark-----UICollectionViewDataSource
@@ -76,8 +85,8 @@ static NSString *ID = @"UICollectionViewCell";
     if (indexPath.section == 0) {
         cell = [self yh_VideoNavView:collectionView cellForItemAtIndexPath:indexPath];
     }else{
-        cell  = [collectionView dequeueReusableCellWithReuseIdentifier:ID forIndexPath:indexPath];
-        cell.backgroundColor = [UIColor greenColor];
+        cell  = [self yh_VideoView:collectionView cellForItemAtIndexPath:indexPath];
+
     }
     
     return cell;
@@ -89,7 +98,7 @@ static NSString *ID = @"UICollectionViewCell";
     if (indexPath.section == 0) {
         size = CGSizeMake(width, 80);
     }else{
-        size = CGSizeMake(width, 150);
+        size = CGSizeMake(width, 240);
     }
     return size;
 

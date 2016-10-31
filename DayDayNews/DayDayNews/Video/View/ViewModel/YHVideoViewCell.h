@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class YHVideoModel;
 @interface YHVideoViewCell : UICollectionViewCell
-
+@property (nonatomic,strong) YHVideoModel *model;
 @end
