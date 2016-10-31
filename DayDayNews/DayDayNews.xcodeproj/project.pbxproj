@@ -38,6 +38,9 @@
 		8473FA2D1DC6EF2600367DB6 /* NSObject+YYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8473FA2A1DC6EF2600367DB6 /* NSObject+YYModel.m */; };
 		8473FA2E1DC6EF2600367DB6 /* YYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8473FA2C1DC6EF2600367DB6 /* YYClassInfo.m */; };
 		8473FA321DC6F05600367DB6 /* YHVideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8473FA311DC6F05600367DB6 /* YHVideoModel.m */; };
+		8473FA351DC6FE3C00367DB6 /* YHVideoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8473FA341DC6FE3C00367DB6 /* YHVideoViewCell.m */; };
+		8473FA391DC6FE8C00367DB6 /* YHVideoNavViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8473FA371DC6FE8C00367DB6 /* YHVideoNavViewCell.m */; };
+		8473FA3A1DC6FE8C00367DB6 /* YHVideoNavViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8473FA381DC6FE8C00367DB6 /* YHVideoNavViewCell.xib */; };
 		84A13BAF1DAD0DB4001A6CFC /* YHRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A13BAE1DAD0DB4001A6CFC /* YHRootViewController.swift */; };
 		84A13BB31DAD0F4E001A6CFC /* YHNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A13BB21DAD0F4E001A6CFC /* YHNewsViewController.swift */; };
 		84A13BB81DAD0FA7001A6CFC /* YHVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A13BB71DAD0FA7001A6CFC /* YHVideoViewController.m */; };
@@ -100,6 +103,11 @@
 		8473FA2C1DC6EF2600367DB6 /* YYClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYClassInfo.m; sourceTree = "<group>"; };
 		8473FA301DC6F05600367DB6 /* YHVideoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHVideoModel.h; sourceTree = "<group>"; };
 		8473FA311DC6F05600367DB6 /* YHVideoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YHVideoModel.m; sourceTree = "<group>"; };
+		8473FA331DC6FE3C00367DB6 /* YHVideoViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHVideoViewCell.h; sourceTree = "<group>"; };
+		8473FA341DC6FE3C00367DB6 /* YHVideoViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YHVideoViewCell.m; sourceTree = "<group>"; };
+		8473FA361DC6FE8C00367DB6 /* YHVideoNavViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHVideoNavViewCell.h; sourceTree = "<group>"; };
+		8473FA371DC6FE8C00367DB6 /* YHVideoNavViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YHVideoNavViewCell.m; sourceTree = "<group>"; };
+		8473FA381DC6FE8C00367DB6 /* YHVideoNavViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YHVideoNavViewCell.xib; sourceTree = "<group>"; };
 		84A13BAE1DAD0DB4001A6CFC /* YHRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHRootViewController.swift; sourceTree = "<group>"; };
 		84A13BB21DAD0F4E001A6CFC /* YHNewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHNewsViewController.swift; sourceTree = "<group>"; };
 		84A13BB61DAD0FA7001A6CFC /* YHVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHVideoViewController.h; sourceTree = "<group>"; };
@@ -303,8 +311,14 @@
 		8473FA241DC6E5DC00367DB6 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				8473FA331DC6FE3C00367DB6 /* YHVideoViewCell.h */,
+				8473FA341DC6FE3C00367DB6 /* YHVideoViewCell.m */,
+				8473FA361DC6FE8C00367DB6 /* YHVideoNavViewCell.h */,
+				8473FA371DC6FE8C00367DB6 /* YHVideoNavViewCell.m */,
+				8473FA381DC6FE8C00367DB6 /* YHVideoNavViewCell.xib */,
 			);
-			path = ViewModel;
+			name = ViewModel;
+			path = View/ViewModel;
 			sourceTree = "<group>";
 		};
 		8473FA261DC6EED000367DB6 /* Lib */ = {
@@ -339,7 +353,8 @@
 				8473FA301DC6F05600367DB6 /* YHVideoModel.h */,
 				8473FA311DC6F05600367DB6 /* YHVideoModel.m */,
 			);
-			path = Model;
+			name = Model;
+			path = View/Model;
 			sourceTree = "<group>";
 		};
 		84A13BB01DAD0ECA001A6CFC /* News */ = {
@@ -361,6 +376,8 @@
 		84A13BB41DAD0F5F001A6CFC /* Video */ = {
 			isa = PBXGroup;
 			children = (
+				8473FA241DC6E5DC00367DB6 /* ViewModel */,
+				8473FA2F1DC6F01100367DB6 /* Model */,
 				84A13BB51DAD0F7D001A6CFC /* View */,
 			);
 			path = Video;
@@ -369,8 +386,6 @@
 		84A13BB51DAD0F7D001A6CFC /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8473FA2F1DC6F01100367DB6 /* Model */,
-				8473FA241DC6E5DC00367DB6 /* ViewModel */,
 				84A13BB61DAD0FA7001A6CFC /* YHVideoViewController.h */,
 				84A13BB71DAD0FA7001A6CFC /* YHVideoViewController.m */,
 			);
@@ -526,6 +541,7 @@
 				84635E921D9D2BA1008B3B7D /* YHCollectionViewCell.xib in Resources */,
 				84635E771D9CB3F3008B3B7D /* placeholder.jpg in Resources */,
 				84CAC2E81D9B50D2001BCD1F /* Assets.xcassets in Resources */,
+				8473FA3A1DC6FE8C00367DB6 /* YHVideoNavViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,6 +614,7 @@
 				8464238D1D9E5B0E00263FB1 /* YHPhotoPickerBrowserPhotoScrollView.m in Sources */,
 				8464238C1D9E5B0E00263FB1 /* YHPhotoPickerBrowserPhotoImageView.m in Sources */,
 				84186F851D9BB75C00956F03 /* YHBaseViewController.swift in Sources */,
+				8473FA351DC6FE3C00367DB6 /* YHVideoViewCell.m in Sources */,
 				8464238A1D9E5B0E00263FB1 /* YHPhotoPickerGroup.m in Sources */,
 				8473FA2E1DC6EF2600367DB6 /* YYClassInfo.m in Sources */,
 				8465B4F81DADD52C006EB0CD /* Bundle.swift in Sources */,
@@ -612,6 +629,7 @@
 				84635E8D1D9D15B9008B3B7D /* HMWaterflowLayout.m in Sources */,
 				8464238B1D9E5B0E00263FB1 /* YHPhotoRect.m in Sources */,
 				8465B4FA1DADE3C6006EB0CD /* YHNavController.swift in Sources */,
+				8473FA391DC6FE8C00367DB6 /* YHVideoNavViewCell.m in Sources */,
 				84CAC2E11D9B50D2001BCD1F /* AppDelegate.swift in Sources */,
 				846AD3801DC444AA0076A788 /* YHProfileViewController.swift in Sources */,
 				84635E971D9D3CE4008B3B7D /* YHHttpTool.m in Sources */,

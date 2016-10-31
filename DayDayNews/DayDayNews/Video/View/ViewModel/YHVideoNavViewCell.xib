@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VideoNavViewCell" id="gTV-IL-0wX" customClass="YHVideoNavViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZU-h9-H9G">
+                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                        <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <inset key="titleEdgeInsets" minX="-40" minY="50" maxX="0.0" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="20" minY="-15" maxX="20" maxY="15"/>
+                        <state key="normal" title="奇葩" image="qipa">
+                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="miracleClicked" destination="gTV-IL-0wX" eventType="touchUpInside" id="PkT-0F-7Oh"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hNu-Rv-bJx">
+                        <rect key="frame" x="80" y="0.0" width="80" height="80"/>
+                        <inset key="titleEdgeInsets" minX="-20" minY="50" maxX="20" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="30"/>
+                        <state key="normal" title="萌宠" image="mengchong">
+                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="cutepetClicked" destination="gTV-IL-0wX" eventType="touchUpInside" id="egF-NC-got"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDn-GX-1dG">
+                        <rect key="frame" x="240" y="0.0" width="80" height="80"/>
+                        <inset key="titleEdgeInsets" minX="-20" minY="50" maxX="20" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="30"/>
+                        <state key="normal" title="精品" image="jingpin">
+                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="boutiqueClicked" destination="gTV-IL-0wX" eventType="touchUpInside" id="pJ6-gZ-f2R"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IAH-vh-cef">
+                        <rect key="frame" x="160" y="0.0" width="80" height="80"/>
+                        <inset key="titleEdgeInsets" minX="-20" minY="50" maxX="20" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="30"/>
+                        <state key="normal" title="美女" image="meinv">
+                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="funyGirlClicked" destination="gTV-IL-0wX" eventType="touchUpInside" id="wUe-hL-yzp"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="IAH-vh-cef" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="1tB-TO-UZU"/>
+                <constraint firstItem="KZU-h9-H9G" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="44G-Wk-6LI"/>
+                <constraint firstAttribute="bottom" secondItem="DDn-GX-1dG" secondAttribute="bottom" id="ALf-N4-FgS"/>
+                <constraint firstAttribute="bottom" secondItem="IAH-vh-cef" secondAttribute="bottom" id="Pxi-Tb-jLn"/>
+                <constraint firstItem="IAH-vh-cef" firstAttribute="leading" secondItem="hNu-Rv-bJx" secondAttribute="trailing" id="U1C-mu-z5y"/>
+                <constraint firstItem="hNu-Rv-bJx" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Vfe-4b-hjd"/>
+                <constraint firstItem="hNu-Rv-bJx" firstAttribute="width" secondItem="KZU-h9-H9G" secondAttribute="width" id="eug-7w-0vZ"/>
+                <constraint firstItem="DDn-GX-1dG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="fJ6-fb-MsB"/>
+                <constraint firstItem="KZU-h9-H9G" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="1:4" id="fXg-8O-qsL"/>
+                <constraint firstAttribute="bottom" secondItem="hNu-Rv-bJx" secondAttribute="bottom" id="fre-Mn-BmD"/>
+                <constraint firstItem="hNu-Rv-bJx" firstAttribute="leading" secondItem="KZU-h9-H9G" secondAttribute="trailing" id="g7u-lU-5ZW"/>
+                <constraint firstItem="IAH-vh-cef" firstAttribute="width" secondItem="hNu-Rv-bJx" secondAttribute="width" id="jlN-b0-Khx"/>
+                <constraint firstItem="DDn-GX-1dG" firstAttribute="width" secondItem="IAH-vh-cef" secondAttribute="width" id="pwh-aD-zsO"/>
+                <constraint firstItem="DDn-GX-1dG" firstAttribute="leading" secondItem="IAH-vh-cef" secondAttribute="trailing" id="r7q-NV-Kz4"/>
+                <constraint firstItem="KZU-h9-H9G" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="yJk-uY-Iew"/>
+                <constraint firstAttribute="bottom" secondItem="KZU-h9-H9G" secondAttribute="bottom" id="yqt-UU-oaR"/>
+            </constraints>
+            <size key="customSize" width="320" height="80"/>
+            <connections>
+                <outlet property="boutique" destination="DDn-GX-1dG" id="fB4-pz-paw"/>
+                <outlet property="cutepet" destination="hNu-Rv-bJx" id="eJS-XW-6ou"/>
+                <outlet property="funyGirl" destination="IAH-vh-cef" id="ZNh-uN-S7t"/>
+                <outlet property="miracle" destination="KZU-h9-H9G" id="o73-x4-8yl"/>
+            </connections>
+            <point key="canvasLocation" x="190" y="308"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="jingpin" width="40" height="40"/>
+        <image name="meinv" width="40" height="40"/>
+        <image name="mengchong" width="40" height="40"/>
+        <image name="qipa" width="40" height="40"/>
+    </resources>
+</document>
