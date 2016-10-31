@@ -8,6 +8,5 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YHVideoViewController : UIViewController
-
+@interface YHVideoViewController : UICollectionViewController<UICollectionViewDelegateFlowLayout>
 @end

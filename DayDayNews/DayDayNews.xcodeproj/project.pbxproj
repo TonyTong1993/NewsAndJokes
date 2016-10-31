@@ -35,11 +35,13 @@
 		846AD3851DC465800076A788 /* YHLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AD3841DC465800076A788 /* YHLoginView.swift */; };
 		846AD38B1DC47AF20076A788 /* YHSettingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AD38A1DC47AF20076A788 /* YHSettingItem.swift */; };
 		846AD38D1DC49CEF0076A788 /* YHSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AD38C1DC49CEF0076A788 /* YHSettingCell.swift */; };
+		8473FA2D1DC6EF2600367DB6 /* NSObject+YYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8473FA2A1DC6EF2600367DB6 /* NSObject+YYModel.m */; };
+		8473FA2E1DC6EF2600367DB6 /* YYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8473FA2C1DC6EF2600367DB6 /* YYClassInfo.m */; };
+		8473FA321DC6F05600367DB6 /* YHVideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8473FA311DC6F05600367DB6 /* YHVideoModel.m */; };
 		84A13BAF1DAD0DB4001A6CFC /* YHRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A13BAE1DAD0DB4001A6CFC /* YHRootViewController.swift */; };
 		84A13BB31DAD0F4E001A6CFC /* YHNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A13BB21DAD0F4E001A6CFC /* YHNewsViewController.swift */; };
 		84A13BB81DAD0FA7001A6CFC /* YHVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A13BB71DAD0FA7001A6CFC /* YHVideoViewController.m */; };
 		84CAC2E11D9B50D2001BCD1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CAC2E01D9B50D2001BCD1F /* AppDelegate.swift */; };
-		84CAC2E31D9B50D2001BCD1F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CAC2E21D9B50D2001BCD1F /* ViewController.swift */; };
 		84CAC2E81D9B50D2001BCD1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84CAC2E71D9B50D2001BCD1F /* Assets.xcassets */; };
 		84CAC2EB1D9B50D2001BCD1F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84CAC2E91D9B50D2001BCD1F /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -91,13 +93,19 @@
 		846AD3841DC465800076A788 /* YHLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHLoginView.swift; sourceTree = "<group>"; };
 		846AD38A1DC47AF20076A788 /* YHSettingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHSettingItem.swift; sourceTree = "<group>"; };
 		846AD38C1DC49CEF0076A788 /* YHSettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHSettingCell.swift; sourceTree = "<group>"; };
+		8473FA251DC6EB9600367DB6 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		8473FA291DC6EF2600367DB6 /* NSObject+YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+YYModel.h"; sourceTree = "<group>"; };
+		8473FA2A1DC6EF2600367DB6 /* NSObject+YYModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YYModel.m"; sourceTree = "<group>"; };
+		8473FA2B1DC6EF2600367DB6 /* YYClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYClassInfo.h; sourceTree = "<group>"; };
+		8473FA2C1DC6EF2600367DB6 /* YYClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYClassInfo.m; sourceTree = "<group>"; };
+		8473FA301DC6F05600367DB6 /* YHVideoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHVideoModel.h; sourceTree = "<group>"; };
+		8473FA311DC6F05600367DB6 /* YHVideoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YHVideoModel.m; sourceTree = "<group>"; };
 		84A13BAE1DAD0DB4001A6CFC /* YHRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHRootViewController.swift; sourceTree = "<group>"; };
 		84A13BB21DAD0F4E001A6CFC /* YHNewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHNewsViewController.swift; sourceTree = "<group>"; };
 		84A13BB61DAD0FA7001A6CFC /* YHVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHVideoViewController.h; sourceTree = "<group>"; };
 		84A13BB71DAD0FA7001A6CFC /* YHVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YHVideoViewController.m; sourceTree = "<group>"; };
 		84CAC2DD1D9B50D2001BCD1F /* DayDayNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayDayNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84CAC2E01D9B50D2001BCD1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		84CAC2E21D9B50D2001BCD1F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		84CAC2E71D9B50D2001BCD1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84CAC2EA1D9B50D2001BCD1F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84CAC2EC1D9B50D2001BCD1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -292,6 +300,48 @@
 			path = Profile/ViewModel;
 			sourceTree = "<group>";
 		};
+		8473FA241DC6E5DC00367DB6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8473FA261DC6EED000367DB6 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		8473FA271DC6EF0A00367DB6 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				8473FA281DC6EF2600367DB6 /* Model */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		8473FA281DC6EF2600367DB6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8473FA291DC6EF2600367DB6 /* NSObject+YYModel.h */,
+				8473FA2A1DC6EF2600367DB6 /* NSObject+YYModel.m */,
+				8473FA2B1DC6EF2600367DB6 /* YYClassInfo.h */,
+				8473FA2C1DC6EF2600367DB6 /* YYClassInfo.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8473FA2F1DC6F01100367DB6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8473FA301DC6F05600367DB6 /* YHVideoModel.h */,
+				8473FA311DC6F05600367DB6 /* YHVideoModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		84A13BB01DAD0ECA001A6CFC /* News */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,6 +369,8 @@
 		84A13BB51DAD0F7D001A6CFC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8473FA2F1DC6F01100367DB6 /* Model */,
+				8473FA241DC6E5DC00367DB6 /* ViewModel */,
 				84A13BB61DAD0FA7001A6CFC /* YHVideoViewController.h */,
 				84A13BB71DAD0FA7001A6CFC /* YHVideoViewController.m */,
 			);
@@ -346,6 +398,8 @@
 		84CAC2DF1D9B50D2001BCD1F /* DayDayNews */ = {
 			isa = PBXGroup;
 			children = (
+				8473FA271DC6EF0A00367DB6 /* Category */,
+				8473FA261DC6EED000367DB6 /* Lib */,
 				8465B4F41DADC9CA006EB0CD /* Const */,
 				84CAC2F61D9B56B7001BCD1F /* Main */,
 				84A13BB01DAD0ECA001A6CFC /* News */,
@@ -355,11 +409,11 @@
 				84186F831D9BB6CE00956F03 /* Photo */,
 				84635E891D9D130C008B3B7D /* Tool */,
 				84CAC2E01D9B50D2001BCD1F /* AppDelegate.swift */,
-				84CAC2E21D9B50D2001BCD1F /* ViewController.swift */,
 				84CAC2E71D9B50D2001BCD1F /* Assets.xcassets */,
 				84CAC2E91D9B50D2001BCD1F /* LaunchScreen.storyboard */,
 				84CAC2EC1D9B50D2001BCD1F /* Info.plist */,
 				84635E761D9CB3F3008B3B7D /* placeholder.jpg */,
+				8473FA251DC6EB9600367DB6 /* PrefixHeader.pch */,
 			);
 			path = DayDayNews;
 			sourceTree = "<group>";
@@ -545,13 +599,15 @@
 				8464238C1D9E5B0E00263FB1 /* YHPhotoPickerBrowserPhotoImageView.m in Sources */,
 				84186F851D9BB75C00956F03 /* YHBaseViewController.swift in Sources */,
 				8464238A1D9E5B0E00263FB1 /* YHPhotoPickerGroup.m in Sources */,
+				8473FA2E1DC6EF2600367DB6 /* YYClassInfo.m in Sources */,
 				8465B4F81DADD52C006EB0CD /* Bundle.swift in Sources */,
-				84CAC2E31D9B50D2001BCD1F /* ViewController.swift in Sources */,
 				84635E751D9C9ED1008B3B7D /* YHPhoto.m in Sources */,
+				8473FA321DC6F05600367DB6 /* YHVideoModel.m in Sources */,
 				846AD38B1DC47AF20076A788 /* YHSettingItem.swift in Sources */,
 				8465B4F61DADCA5A006EB0CD /* UIColor+Extension.swift in Sources */,
 				84A13BAF1DAD0DB4001A6CFC /* YHRootViewController.swift in Sources */,
 				846423861D9E5B0E00263FB1 /* DACircularProgressView.m in Sources */,
+				8473FA2D1DC6EF2600367DB6 /* NSObject+YYModel.m in Sources */,
 				846423871D9E5B0E00263FB1 /* YHPhotoAssets.m in Sources */,
 				84635E8D1D9D15B9008B3B7D /* HMWaterflowLayout.m in Sources */,
 				8464238B1D9E5B0E00263FB1 /* YHPhotoRect.m in Sources */,
@@ -668,6 +724,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = DayDayNews/PrefixHeader.pch;
 				INFOPLIST_FILE = DayDayNews/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yihe.DayDayNews;
@@ -687,6 +745,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = DayDayNews/PrefixHeader.pch;
 				INFOPLIST_FILE = DayDayNews/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yihe.DayDayNews;

@@ -13,7 +13,6 @@
 #import "HMWaterflowLayout.h"
 #import "SDImageCache.h"
 #import "YHCollectionViewCell.h"
-#import "YHHttpTool.h"
 #import "MJExtension.h"
 #import "YHPhotoPickerBrowserViewController.h"
 #import "YHPhotoBrowserPhoto.h"
@@ -80,6 +79,7 @@ typedef  NS_ENUM (NSUInteger,LoadDataState){
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"图片";
     [self setupView];
     pn = 0,rn = 30;
     _tag1 = @"美女";
