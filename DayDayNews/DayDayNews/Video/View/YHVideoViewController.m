@@ -12,7 +12,11 @@
 #import "YHVideoViewCell.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
-#define video_list_Path  [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"videoLists.plist"]
+#import "MJRefresh.h"
+#define MAS_SHORTHAND
+#define MAS_SHORTHAND_GLOBALS
+#import "Masonry.h"
+#define video_list_Path  [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"videoLists.json"]
 @interface YHVideoViewController ()
 @property (nonatomic,assign) int count;
 @property (nonatomic,copy) NSMutableArray *dataSource;
@@ -39,34 +43,69 @@ static NSString *ID = @"YHVideoViewCell";
     [self.collectionView registerClass:[YHVideoViewCell class] forCellWithReuseIdentifier:ID];
     [self.collectionView registerNib:[UINib nibWithNibName:@"YHVideoNavViewCell" bundle:nil] forCellWithReuseIdentifier:@"VideoNavViewCell"];
     [self.collectionView setBackgroundColor:[UIColor grayColor]];
-    
-    //设置下拉刷新
-   
-
-    [self loadData];
+    [self pullDown];
+    [self loadDataFromDocument];
     
 }
 #pragma mark ---private
+- (void)loadDataFromDocument{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:video_list_Path]) {
+       NSData *data = [NSData dataWithContentsOfFile:video_list_Path];
+       id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        [self parseJsonData:json];
+    }else{
+        [self loadData];
+    }
+}
 - (void)loadData{
-    NSString *urlStr = [NSString stringWithFormat:@"http://c.m.163.com/nc/video/home/%d-30.html",self.count];
+    NSString *urlStr = [NSString stringWithFormat:@"http://c.m.163.com/nc/video/home/%d-5 0.html",self.count];
     NSDictionary *parameters = [NSDictionary dictionary];
-    [YHHttpTool GET:urlStr parameters:parameters success:^(NSDictionary *success) {
+    [YHHttpTool GET:urlStr parameters:parameters success:^(id success) {
         //写入数据库
         NSFileManager *fm = [NSFileManager defaultManager];
         if ([fm createFileAtPath:video_list_Path contents:nil attributes:nil]
             ==YES) {
-            [success writeToFile:video_list_Path atomically:YES];
+            NSOutputStream *outStream = [NSOutputStream outputStreamToFileAtPath:video_list_Path append:YES];
+            [outStream open];
+            [NSJSONSerialization writeJSONObject:success toStream:outStream options:NSJSONWritingPrettyPrinted error:nil];
         }
-        NSArray *videoList = success[@"videoList"];
-        NSMutableArray *models = [[NSMutableArray alloc] init];
-        for (NSDictionary *dic in videoList) {
-         YHVideoModel *model =  [YHVideoModel modelWithDictionary:dic];
-            NSLog(@"model.title = %@",model.title);
-            [models addObject:model];
-        }
-        self.dataSource = models;
-        [self.collectionView reloadData];
+        [self parseJsonData:success];
     }];
+}
+- (void)parseJsonData:(id)json{
+    NSArray *videoList = json[@"videoList"];
+    NSMutableArray *models = [[NSMutableArray alloc] init];
+    for (NSDictionary *dic in videoList) {
+        YHVideoModel *model =  [YHVideoModel modelWithDictionary:dic];
+        NSLog(@"model.title = %@",model.title);
+        [models addObject:model];
+    }
+    self.dataSource = models;
+    self.count = 10;
+    [self.collectionView reloadData];
+    [self.collectionView.mj_header endRefreshing];
+}
+- (void)pullDown{
+    //设置下拉刷新
+    __weak typeof(self) weakSelf = self;
+    MJRefreshGifHeader *headerRefresh = [MJRefreshGifHeader headerWithRefreshingBlock:^{
+        [weakSelf.collectionView.mj_header beginRefreshing];
+        [weakSelf loadData];
+    }];
+    [self.collectionView setMj_header:headerRefresh];
+    NSMutableArray *images = [NSMutableArray arrayWithCapacity:60];
+    for (int i = 1; i<= 60; i++) {
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"dropdown_anim__000%d",i]];
+        [images addObject:image];
+    }
+    [headerRefresh setImages:images duration:1.0 forState:MJRefreshStatePulling];
+    
+    [headerRefresh.gifView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(weakSelf.view);
+        make.top.equalTo(weakSelf.view.mas_top).offset(64);
+    }];
+ 
 }
 -(UICollectionViewCell *)yh_VideoNavView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     YHVideoNavViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"VideoNavViewCell" forIndexPath:indexPath];
@@ -133,12 +172,7 @@ static NSString *ID = @"YHVideoViewCell";
 
 }
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-//    CGFloat minimumLineSpacing;
-//    if (section == 0) {
-//        minimumLineSpacing = 5;
-//    }else{
-//        minimumLineSpacing  = 10;
-//    }
+
     return 10;
 }
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
