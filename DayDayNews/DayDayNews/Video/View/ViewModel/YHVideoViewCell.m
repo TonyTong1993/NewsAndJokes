@@ -13,6 +13,7 @@
 #define MAS_SHORTHAND_GLOBALS
 #import "Masonry.h"
 #import "UIImage+YH.h"
+#import "SDImageCache.h"
 @interface YHVideoViewCell()
 @property (nonatomic,retain) UILabel *titleLabel;
 @property (nonatomic,retain) UIImageView *preView;
@@ -81,11 +82,16 @@
     self.titleLabel.text = model.title;
     self.updateLabel.text = model.ptime;
     NSURL *coverURL = [NSURL URLWithString:model.cover];
-    [self.preView sd_setImageWithURL:coverURL placeholderImage: [UIImage imageNamed:@"videoplaceholder"]];
+    UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:model.cover];
+    if (image) {
+        [self.preView setImage:image];
+    }else{
+         [self.preView sd_setImageWithURL:coverURL placeholderImage: [UIImage imageNamed:@"videoplaceholder"]];
+    }
     int miniute = (int)model.length/60;
     int second = model.length%60;
     NSString *duration = [NSString stringWithFormat:@"%2d:%2d",miniute,second];
-    NSString *playCount = [NSString stringWithFormat:@"%u",model.playCount];
+    NSString *playCount = [NSString stringWithFormat:@"%lu",(unsigned long)model.playCount];
     //NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     //dateFormat.dateFormat = @"yyyy-mm-dd hh:mm:ss";
     //NSDate *date = [dateFormat dateFromString:model.ptime];

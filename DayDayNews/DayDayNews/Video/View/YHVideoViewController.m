@@ -59,7 +59,7 @@ static NSString *ID = @"YHVideoViewCell";
     }
 }
 - (void)loadData{
-    NSString *urlStr = [NSString stringWithFormat:@"http://c.m.163.com/nc/video/home/%d-5 0.html",self.count];
+    NSString *urlStr = [NSString stringWithFormat:@"http://c.m.163.com/nc/video/home/%d-10.html",self.count];
     NSDictionary *parameters = [NSDictionary dictionary];
     [YHHttpTool GET:urlStr parameters:parameters success:^(id success) {
         //写入数据库
@@ -78,7 +78,6 @@ static NSString *ID = @"YHVideoViewCell";
     NSMutableArray *models = [[NSMutableArray alloc] init];
     for (NSDictionary *dic in videoList) {
         YHVideoModel *model =  [YHVideoModel modelWithDictionary:dic];
-        NSLog(@"model.title = %@",model.title);
         [models addObject:model];
     }
     self.dataSource = models;
