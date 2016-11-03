@@ -22,6 +22,7 @@ typedef  NS_ENUM (NSUInteger,LoadDataState){
     LoadDataStateMoreData,
     LoadDataStateNewData,
 };
+#define photo_list_Path  [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"photoLists.json"]
 @interface YHPhotoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,HMWaterflowLayoutDelegate,YHPhotoPickerBrowserViewControllerDataSource,YHPhotoPickerBrowserViewControllerDelegate>{
     int pn,rn;
     NSString *_tag1,*_tag2;
@@ -85,10 +86,20 @@ typedef  NS_ENUM (NSUInteger,LoadDataState){
     pn = 0,rn = 30;
     _tag1 = @"美女";
     _tag2 = @"小清新";
-    [self initNetWorking:LoadDataStateInitNetWoring];
+    [self loadDataFromDocument];
 }
 -(BOOL)prefersStatusBarHidden{
     return YES;
+}
+- (void)loadDataFromDocument{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:photo_list_Path]) {
+        NSData *data = [NSData dataWithContentsOfFile:photo_list_Path];
+        id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        [self parseJsonData:json];
+    }else{
+       [self initNetWorking:LoadDataStateInitNetWoring];
+    }
 }
 #pragma mark---获取数据
 -(void)loadData{
@@ -110,12 +121,14 @@ typedef  NS_ENUM (NSUInteger,LoadDataState){
     [self HttpTool:urlStr parameters:parameters state:state];
 }
 -(void)HttpTool:(NSString *)urlStr parameters:(NSDictionary *)parameters state:(LoadDataState)state{
-    [YHHttpTool GET:urlStr parameters:parameters success:^(NSDictionary *responseObject) {
-                NSArray *imgs = responseObject[@"imgs"];
-        NSMutableArray *photos = [[NSMutableArray alloc] init];
-        for (NSDictionary *dic in imgs) {
-           YHPhoto *photo = [YHPhoto modelWithDictionary:dic];
-            [photos addObject:photo];
+    [YHHttpTool GET:urlStr parameters:parameters success:^(id responseObject) {
+        //写入数据库
+        NSFileManager *fm = [NSFileManager defaultManager];
+        if ([fm createFileAtPath:photo_list_Path contents:nil attributes:nil]
+            ==YES) {
+            NSOutputStream *outStream = [NSOutputStream outputStreamToFileAtPath:photo_list_Path append:YES];
+            [outStream open];
+            [NSJSONSerialization writeJSONObject:responseObject toStream:outStream options:NSJSONWritingPrettyPrinted error:nil];
         }
         //设置pn 起始位置
         switch (state) {
@@ -137,8 +150,7 @@ typedef  NS_ENUM (NSUInteger,LoadDataState){
                 break;
         }
         //设置数据源刷新表格数据
-          self.dataSources = photos;
-         [self.collectionView reloadData];
+        [self parseJsonData:responseObject];
     }];
 }
 -(void)loadNewData{
@@ -146,6 +158,16 @@ typedef  NS_ENUM (NSUInteger,LoadDataState){
 }
 -(void)loadMoreData{
     [self initNetWorking:LoadDataStateMoreData];
+}
+-(void)parseJsonData:(id)json{
+    NSArray *imgs = json[@"imgs"];
+    NSMutableArray *photos = [[NSMutableArray alloc] init];
+    for (NSDictionary *dic in imgs) {
+        YHPhoto *photo = [YHPhoto modelWithDictionary:dic];
+        [photos addObject:photo];
+    }
+    self.dataSources = photos;
+    [self.collectionView reloadData];
 }
 #pragma mark---设置界面
 -(void)setupView{
