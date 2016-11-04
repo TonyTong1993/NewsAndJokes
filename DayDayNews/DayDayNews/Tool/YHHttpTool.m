@@ -24,4 +24,13 @@ static AFHTTPSessionManager *_mgr;
         NSLog(@"%s------error=%@",__func__,[error localizedDescription]);
     }] resume];
 }
++(void)POST:(NSString *)urlStr parameters:(NSDictionary *)parameters success:(void (^)(id responseObject)) success{
+    [[_mgr POST:urlStr parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        //处理成功后的responseObject
+        success(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        //处理失败
+        NSLog(@"%s------error=%@",__func__,[error localizedDescription]);
+    }] resume];
+}
 @end

@@ -8,37 +8,18 @@
 
 #import <Foundation/Foundation.h>
 /*
- cover
- description
- length
- m3u8Hd_url
- m3u8_url
- mp4Hd_url
- mp4_url
- playCount int
- playersize int
- ptime
- title
- topicDesc
- topicImg
- topicName
- topicSid
- videoTopic dictionary{
- 
- }
- videosource
+ group
+ online_time
+ type
+ comments
+ display_time
  */
+@class YHJokeInfo;
 @interface YHVideoModel : NSObject
-@property (nonatomic,copy) NSString *cover;//preViewImage
-//@property (nonatomic,copy) NSString *description;
-@property (nonatomic,copy) NSString *m3u8Hd_url;
-@property (nonatomic,copy) NSString *m3u8_url;
-@property (nonatomic,copy) NSString *mp4Hd_url;
-@property (nonatomic,copy) NSString *mp4_url;//播放链接
-@property (nonatomic,copy) NSString *title;//标题
-@property (nonatomic,assign) NSUInteger length;//时长
-@property (nonatomic,copy) NSString *topicDesc;
-@property (nonatomic,copy) NSString *topicName;
-@property (nonatomic,assign) NSUInteger playCount;//播放次数
-@property (nonatomic,copy) NSString *ptime;//发布时间
+@property (nonatomic,retain) YHJokeInfo *jokeInfo;
+@property (nonatomic,copy) NSArray *comments;
+@property (nonatomic,assign) NSInteger online_time;
+@property (nonatomic,assign) NSInteger display_time;
+@property (nonatomic,assign) NSInteger type;
+
 @end

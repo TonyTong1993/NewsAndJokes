@@ -9,4 +9,5 @@
 #import <Foundation/Foundation.h>
 @interface YHHttpTool : NSObject
 +(void)GET:(NSString *)urlStr parameters:(NSDictionary *)parameters success:(void (^)(id success)) success;
++(void)POST:(NSString *)urlStr parameters:(NSDictionary *)parameters success:(void (^)(id responseObject)) success;
 @end

@@ -14,6 +14,7 @@
 #import "Masonry.h"
 #import "UIImage+YH.h"
 #import "SDImageCache.h"
+#import "YHJokeInfo.h"
 @interface YHVideoViewCell()
 @property (nonatomic,retain) UILabel *titleLabel;
 @property (nonatomic,retain) UIImageView *preView;
@@ -79,26 +80,28 @@
 }
 -(void)setModel:(YHVideoModel *)model{
     _model = model;
-    self.titleLabel.text = model.title;
-    self.updateLabel.text = model.ptime;
-    NSURL *coverURL = [NSURL URLWithString:model.cover];
-    UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:model.cover];
+    self.titleLabel.text = model.jokeInfo.title;
+   NSDate* date = [NSDate dateWithTimeIntervalSinceNow:model.online_time];
+   NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"hh:mm:ss";
+   NSString *dateStr = [formatter stringFromDate:date];
+    self.updateLabel.text = dateStr;
+    NSURL *coverURL = [NSURL URLWithString:model.jokeInfo.coverURL];
+    UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:model.jokeInfo.coverURL];
     if (image) {
         [self.preView setImage:image];
     }else{
          [self.preView sd_setImageWithURL:coverURL placeholderImage: [UIImage imageNamed:@"videoplaceholder"]];
     }
-    int miniute = (int)model.length/60;
-    int second = model.length%60;
-    NSString *duration = [NSString stringWithFormat:@"%2d:%2d",miniute,second];
-    NSString *playCount = [NSString stringWithFormat:@"%lu",(unsigned long)model.playCount];
+    NSString *duration = [NSString stringWithFormat:@"%f",model.jokeInfo.duration];
+    //NSString *playCount = [NSString stringWithFormat:@"%lu",(unsigned long)model.playCount];
     //NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     //dateFormat.dateFormat = @"yyyy-mm-dd hh:mm:ss";
     //NSDate *date = [dateFormat dateFromString:model.ptime];
     
     [self.duration setTitle:duration forState:UIControlStateNormal];
     [self.duration setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    [self.times setTitle:playCount forState:UIControlStateNormal];
+    //[self.times setTitle:playCount forState:UIControlStateNormal];
     [self.times setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     UIImage *durationImage = [UIImage imageNamed:@"play"];
     durationImage = [durationImage fixOrietationWithScale:0.4];
@@ -112,7 +115,8 @@
     CGFloat screen_width = [UIScreen mainScreen].bounds.size.width;
     CGFloat screen_height = [UIScreen mainScreen].bounds.size.height;
     CGFloat standardRation = screen_width / screen_height;
-    CGFloat video_height = 135 / standardRation;
+    CGFloat ration = _model.jokeInfo.width/_model.jokeInfo.height;
+    CGFloat video_height = screen_width / ration;
     __weak typeof(self) weakSelf = self;
     [_titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.contentView.mas_top);

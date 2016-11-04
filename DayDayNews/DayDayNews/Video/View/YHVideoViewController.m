@@ -16,9 +16,9 @@
 #define MAS_SHORTHAND
 #define MAS_SHORTHAND_GLOBALS
 #import "Masonry.h"
-#define video_list_Path  [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"videoLists.json"]
+#import "YHJokeInfo.h"
+#define video_list_Path  [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"videoLists.plist"]
 @interface YHVideoViewController ()
-@property (nonatomic,assign) int count;
 @property (nonatomic,copy) NSMutableArray *dataSource;
 @end
 
@@ -59,8 +59,40 @@ static NSString *ID = @"YHVideoViewCell";
     }
 }
 - (void)loadData{
-    NSString *urlStr = [NSString stringWithFormat:@"http://c.m.163.com/nc/video/home/%d-10.html",self.count];
-    NSDictionary *parameters = [NSDictionary dictionary];
+    /*
+     http://ic.snssdk.com/neihan/stream/mix/v1/?content_type=-104&iid=6133906033&os_version=9.3&os_api=18&app_name=joke_essay&channel=App%20Store&device_platform=iphone&idfa=697404CB-5F6C-4647-9360-1E7A45C95A3E&live_sdk_version=130&vid=E73FF3FB-687F-427E-A6AC-2CC6D9504BE3&openudid=a3884542ba0457088bd1bdb63df8e202d6ec24c9&device_type=iPhone8,1&version_code=5.6.0&ac=WIFI&screen_width=750&device_id=34132309956&aid=7&city=%E6%B9%96%E5%8C%97%E7%9C%81&content_type=-104&count=30&essence=1&latitude=30.53599676681255&longitude=114.3259168610388&message_cursor=0&min_time=0&mpic=1
+     http://ic.snssdk.com/neihan/stream/mix/v1/
+     */
+
+    //NSString *urlStr = [NSString stringWithFormat:@"http://c.m.163.com/nc/video/home/%d-10.html",self.count];
+    NSString *urlStr = [NSString stringWithFormat:@"http://ic.snssdk.com/neihan/stream/mix/v1"];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"content_type"] = @"-104";
+    parameters[@"iid"] = @"6133906033";
+    parameters[@"os_version"] = @"9.3";
+    parameters[@"os_api"] = @"18";
+    parameters[@"app_name"] = @"joke_essay";
+    parameters[@"channel"] = @"App%20Store";
+    parameters[@"device_platform"] = @"iphone";
+    parameters[@"idfa"] = @"697404CB-5F6C-4647-9360-1E7A45C95A3E";
+    parameters[@"live_sdk_version"] = @"130";
+    parameters[@"vid"] = @"E73FF3FB-687F-427E-A6AC-2CC6D9504BE3";
+    parameters[@"openudid"] = @"a3884542ba0457088bd1bdb63df8e202d6ec24c9";
+    parameters[@"device_type"] = @"iPhone8,1";
+    parameters[@"version_code"] = @"5.6.0";
+    parameters[@"ac"] = @"WIFI";
+    parameters[@"screen_width"] = @"750";
+    parameters[@"device_id"] = @"34132309956";
+    parameters[@"aid"] = @"7";
+    parameters[@"city"] = @"%E6%B9%96%E5%8C%97%E7%9C%81";
+    parameters[@"content_type"] = @"-104";
+    parameters[@"count"] = @"30";
+    parameters[@"essence"] = @"1";
+    parameters[@"latitude"] = @"30.53599676681255";
+    parameters[@"longitude"] = @"114.3259168610388";
+    parameters[@"message_cursor"] = @"0";
+    parameters[@"min_time"] = @"0";
+    parameters[@"mpic"] = @"1";
     [YHHttpTool GET:urlStr parameters:parameters success:^(id success) {
         //写入数据库
         NSFileManager *fm = [NSFileManager defaultManager];
@@ -74,14 +106,28 @@ static NSString *ID = @"YHVideoViewCell";
     }];
 }
 - (void)parseJsonData:(id)json{
-    NSArray *videoList = json[@"videoList"];
+    NSArray *videoList = json[@"data"][@"data"];
     NSMutableArray *models = [[NSMutableArray alloc] init];
     for (NSDictionary *dic in videoList) {
-        YHVideoModel *model =  [YHVideoModel modelWithDictionary:dic];
-        [models addObject:model];
+        if (!dic[@"group"]) continue;
+        NSDictionary *group = dic[@"group"];
+      YHJokeInfo *jokeInfo =  [YHJokeInfo modelWithDictionary:group];
+        NSArray *medium_cover = group[@"medium_cover"][@"url_list"];
+        jokeInfo.coverURL = [medium_cover lastObject][@"url"];
+        NSDictionary *videoInfo = group[@"480p_video"];
+        NSArray *url_list = videoInfo[@"url_list"] ;
+        jokeInfo.url = [url_list lastObject][@"url"];
+        jokeInfo.width    = [videoInfo[@"width"] integerValue];
+        jokeInfo.height    = [videoInfo[@"height"] integerValue];
+        YHVideoModel *model = [[YHVideoModel alloc] init];
+        model.jokeInfo = jokeInfo;
+        model.type = [dic[@"type"] integerValue];
+        model.online_time = [dic[@"online_time"] integerValue];
+        model.display_time = [dic[@"type"] integerValue];
+        model.comments     = dic[@"comments"];
+       [models addObject:model];
     }
     self.dataSource = models;
-    self.count = 10;
     [self.collectionView reloadData];
     [self.collectionView.mj_header endRefreshing];
 }
@@ -145,7 +191,7 @@ static NSString *ID = @"YHVideoViewCell";
     if (indexPath.section == 1) {
          YHVideoModel *model = self.dataSource[indexPath.row];
       AVPlayerViewController *playerVC = [[AVPlayerViewController alloc] init];
-        NSURL *url = [NSURL URLWithString:model.mp4_url];
+        NSURL *url = [NSURL URLWithString:model.jokeInfo.url];
         AVPlayer *player = [AVPlayer playerWithURL:url];
         playerVC.player = player;
         [self presentViewController:playerVC animated:YES completion:^{
@@ -156,15 +202,18 @@ static NSString *ID = @"YHVideoViewCell";
 }
 #pragma mark-----UICollectionViewDelegateFlowLayout
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    CGSize size;
+   
     CGFloat screen_width = [UIScreen mainScreen].bounds.size.width;
     CGFloat screen_height = [UIScreen mainScreen].bounds.size.height;
-    CGFloat standardRation = screen_width / screen_height;
-    CGFloat video_width = screen_width;
-    CGFloat video_height = 135 / standardRation;
+    CGSize size = CGSizeMake(screen_width, 80);
     if (indexPath.section == 0) {
         size = CGSizeMake(screen_width, 80);
     }else{
+        YHVideoModel *model = self.dataSource[indexPath.row];
+        CGFloat standardRation = screen_width / screen_height;
+        CGFloat ration = model.jokeInfo.width/model.jokeInfo.height;
+        CGFloat video_width = screen_width;
+        CGFloat video_height = screen_width / ration;
         size = CGSizeMake(video_width, video_height + 90);
     }
     return size;
