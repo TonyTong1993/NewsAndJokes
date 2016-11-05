@@ -210,7 +210,7 @@ static NSString *ID = @"YHVideoViewCell";
         size = CGSizeMake(screen_width, 80);
     }else{
         YHVideoModel *model = self.dataSource[indexPath.row];
-        CGFloat standardRation = screen_width / screen_height;
+        //CGFloat standardRation = screen_width / screen_height;
         CGFloat ration = model.jokeInfo.width/model.jokeInfo.height;
         CGFloat video_width = screen_width;
         CGFloat video_height = screen_width / ration;
